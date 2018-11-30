@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Game</string>
+    <string name="facebook_app_id">2233681650241915</string>
+    <string name="fb_login_protocol_scheme">fb2233681650241915</string>
+    <string name="hint_gender">I am</string>
+    <string name="hint_password">Password</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="btn_sign_up">Register</string>
+    <string name="title_activity_settings">Settings</string>
+
+
+</resources>

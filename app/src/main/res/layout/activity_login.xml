@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registration_Login.Login">
+<ImageView
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:src="@drawable/logo"
+    android:layout_centerHorizontal="true"/>
+
+<LinearLayout
+    android:gravity="center"
+    android:layout_marginTop="100dp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical"
+    android:fillViewport="true"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:orientation="vertical">
+      <android.support.design.widget.TextInputLayout
+          android:layout_margin="10dp"
+          android:background="@null"
+          android:textColorHint="#ffffff"
+          android:id="@+id/login_input_layout_email"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+         <EditText
+             android:layout_margin="10dp"
+             android:id="@+id/login_input_email"
+             android:textColor="#ffffff"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:inputType="textEmailAddress"
+             android:hint="Email" />
+      </android.support.design.widget.TextInputLayout>
+      <android.support.design.widget.TextInputLayout
+          android:layout_margin="10dp"
+          android:background="@null"
+          android:textColorHint="#ffffff"
+          android:id="@+id/login_input_layout_password"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+         <EditText
+             android:layout_margin="10dp"
+             android:id="@+id/login_input_password"
+             android:textColor="#ffffff"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:inputType="textPassword"
+             android:hint="@string/hint_password" />
+      </android.support.design.widget.TextInputLayout>
+      <Button android:id="@+id/btn_login"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:text="LOGIN"
+          android:background="#cfa05a"
+          android:layout_marginTop="20dp"
+          android:textColor="@android:color/white"/>
+     </LinearLayout>
+</RelativeLayout>
