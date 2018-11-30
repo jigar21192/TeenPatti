@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
 
   EditText email,password;
   Button login;
-  String Login_URL="http://sabkuchhbechde.ga/teenpatti/login.php";
+  String Login_URL="http://sabkuchhbechde.ga/teenpatti/android_login.php";
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs" ;
 

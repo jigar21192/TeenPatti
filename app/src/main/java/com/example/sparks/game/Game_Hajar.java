@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -26,7 +27,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sparks.game.Registration_Login.Login;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +44,7 @@ public class Game_Hajar extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String KEY_Email = "email";
     public static final String ID= "id";
+    String IN_CARD_LOAD="http://sabkuchhbechde.ga/teenpatti/hazar_res.php";
     String BID_URL="http://sabkuchhbechde.ga/teenpatti/bid_details.php";
     SharedPreferences sharedpreferences;
     LinearLayout in_page,out_page,linearLayout;
@@ -44,8 +52,9 @@ public class Game_Hajar extends AppCompatActivity {
     RelativeLayout relativeLayout;
     Button select_card,select_money,bid;
     TextView username;
+    ImageView image_in;
     ToggleButton toggleButton;
-
+    Timer repeatTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,19 +71,22 @@ public class Game_Hajar extends AppCompatActivity {
         select_card=findViewById(R.id.select_card);
         select_money=findViewById(R.id.select_money);
         bid=findViewById(R.id.bid);
+        image_in=findViewById(R.id.image_in);
         username=findViewById(R.id.user);
         username.setText(user);
 
         in_page=findViewById(R.id.l3);
         out_page=findViewById(R.id.l4);
 
-        Timer repeatTask = new Timer();
+
+        repeatTask = new Timer();
         repeatTask.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        load_in_page();
 
                         Toast.makeText(Game_Hajar.this, "hi", Toast.LENGTH_SHORT).show();
 
@@ -144,6 +156,51 @@ public class Game_Hajar extends AppCompatActivity {
                 });
             }
         }, 0, 5000);
+
+    }
+
+    private void load_in_page() {
+
+        StringRequest request=new StringRequest(Request.Method.GET, IN_CARD_LOAD, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONArray array=new JSONArray(response);
+                        for (int i=0;i<array.length();i++) {
+                            JSONObject object = array.getJSONObject(i);
+                            String card=object.getString("category");
+
+                            Glide.with(Game_Hajar.this).load(card)
+                                    .thumbnail(0.5f)
+                                    .crossFade()
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .into(image_in);
+                        }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Game_Hajar.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        })
+       /* {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String>param=new HashMap<>();
+
+                return param;
+            }
+        }*/;
+
+        RequestQueue queue=Volley.newRequestQueue(Game_Hajar.this);
+        queue.add(request);
+
 
     }
 
@@ -316,6 +373,11 @@ public class Game_Hajar extends AppCompatActivity {
 
         //close the popup wind
 
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();        //  <<-------ENSURE onStop()
+        repeatTask.cancel();
     }
 
 
