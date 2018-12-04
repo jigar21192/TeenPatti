@@ -16,7 +16,7 @@ public class Second_Page extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String KEY_Email = "email";
     SharedPreferences sharedpreferences;
-    CardView hajar;
+    CardView hajar,manno;
     TextView username;
    // private SoundPlayer soundPlayer;
     @Override
@@ -28,6 +28,7 @@ public class Second_Page extends AppCompatActivity {
         username=findViewById(R.id.name);
 
         hajar=findViewById(R.id.card1);
+        manno=findViewById(R.id.card2);
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         final String user=sharedpreferences.getString("email","");
 
@@ -37,6 +38,13 @@ public class Second_Page extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(Second_Page.this,Game_Hajar.class);
+                startActivity(intent);
+            }
+        });
+        manno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Second_Page.this,Manno_Game.class);
                 startActivity(intent);
             }
         });

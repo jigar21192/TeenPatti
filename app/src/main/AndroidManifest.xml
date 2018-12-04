@@ -36,7 +36,11 @@
         <activity
             android:name=".Registration_Login.Login"
             android:screenOrientation="landscape" />
-        <activity android:name=".Game_Hajar" android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".Game_Hajar"
+            android:screenOrientation="landscape" />
+        <activity android:name=".Manno_Game"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
