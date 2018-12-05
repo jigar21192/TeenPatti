@@ -166,20 +166,20 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/no"
+                android:id="@+id/no10"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#dcdcdc"
                 android:gravity="center"
-                android:text="*"
+                android:text="10"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="18dp" />
 
             <Button
-                android:id="@+id/c"
-                android:text="C"
+                android:id="@+id/j_card"
+                android:text="J"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -190,16 +190,37 @@
                 android:gravity="center"/>
 
             <Button
-                android:id="@+id/no10"
+                android:id="@+id/q_card"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:text="10"
+                android:text="Q"
                 android:layout_weight="1"
                 android:background="#dcdcdc"
                 android:textColor="#000000"
                 android:textAlignment="center"
                 android:textSize="18dp"
                 android:gravity="center"/>
+
+        </TableRow>
+        <TableRow
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/k_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#dcdcdc"
+                android:gravity="center"
+                android:text="K"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
 
         </TableRow>
 

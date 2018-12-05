@@ -173,7 +173,7 @@ public class Game_Hajar extends AppCompatActivity {
                         JSONObject object = array.getJSONObject(i);
                         String card=object.getString("category");
 
-                        Glide.with(Game_Hajar.this).load(card)
+                        Glide.with(getApplicationContext()).load(card)
                                 .thumbnail(0.5f)
                                 .crossFade()
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -218,7 +218,7 @@ public class Game_Hajar extends AppCompatActivity {
                             JSONObject object = array.getJSONObject(i);
                             String card=object.getString("category");
 
-                            Glide.with(Game_Hajar.this).load(card)
+                            Glide.with(getApplicationContext()).load(card)
                                     .thumbnail(0.5f)
                                     .crossFade()
                                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -339,6 +339,14 @@ public class Game_Hajar extends AppCompatActivity {
         final Button eight=customView.findViewById(R.id.no8);
         final Button nine=customView.findViewById(R.id.no9);
         final Button ten=customView.findViewById(R.id.no10);
+        final Button j_card=customView.findViewById(R.id.j_card);
+        final Button q_card=customView.findViewById(R.id.q_card);
+        final Button k_card=customView.findViewById(R.id.k_card);
+
+        j_card.setVisibility(View.GONE);
+        q_card.setVisibility(View.GONE);
+        k_card.setVisibility(View.GONE);
+
 
 
         one.setOnClickListener(new View.OnClickListener() {
@@ -421,9 +429,16 @@ public class Game_Hajar extends AppCompatActivity {
         //close the popup wind
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
     @Override
     protected void onStop() {
-        super.onStop();        //  <<-------ENSURE onStop()
+        super.onStop();//  <<-------ENSURE onStop()
+
 
     }
 

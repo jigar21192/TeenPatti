@@ -165,7 +165,7 @@ public class Manno_Game extends AppCompatActivity {
                         JSONObject object = array.getJSONObject(i);
                         String card=object.getString("category");
 
-                        Glide.with(Manno_Game.this).load(card)
+                        Glide.with(getApplicationContext()).load(card)
                                 .thumbnail(0.5f)
                                 .crossFade()
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -210,7 +210,7 @@ public class Manno_Game extends AppCompatActivity {
                         JSONObject object = array.getJSONObject(i);
                         String card=object.getString("category");
 
-                        Glide.with(Manno_Game.this).load(card)
+                        Glide.with(getApplicationContext()).load(card)
                                 .thumbnail(0.5f)
                                 .crossFade()
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -331,6 +331,9 @@ public class Manno_Game extends AppCompatActivity {
         final Button eight=customView.findViewById(R.id.no8);
         final Button nine=customView.findViewById(R.id.no9);
         final Button ten=customView.findViewById(R.id.no10);
+        final Button j_card=customView.findViewById(R.id.j_card);
+        final Button q_card=customView.findViewById(R.id.q_card);
+        final Button k_card=customView.findViewById(R.id.k_card);
 
 
         one.setOnClickListener(new View.OnClickListener() {
@@ -403,6 +406,27 @@ public class Manno_Game extends AppCompatActivity {
                 m_popupWindow.dismiss();
             }
         });
+        j_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                m_select_card.setText(j_card.getText().toString());
+                m_popupWindow.dismiss();
+            }
+        });
+        q_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                m_select_card.setText(q_card.getText().toString());
+                m_popupWindow.dismiss();
+            }
+        });
+        k_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                m_select_card.setText(k_card.getText().toString());
+                m_popupWindow.dismiss();
+            }
+        });
 
         //instantiate popup window
         m_popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -413,6 +437,13 @@ public class Manno_Game extends AppCompatActivity {
         //close the popup wind
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
+
     @Override
     protected void onStop() {
         super.onStop();        //  <<-------ENSURE onStop()
