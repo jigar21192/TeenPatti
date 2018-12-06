@@ -89,7 +89,7 @@ public class Game_Hajar extends AppCompatActivity {
                     public void run() {
                         load_in_page();
 
-                        load_out_page();
+                  //      load_out_page();
 
                         Toast.makeText(Game_Hajar.this, "hi", Toast.LENGTH_SHORT).show();
 
@@ -161,7 +161,7 @@ public class Game_Hajar extends AppCompatActivity {
 
     }
 
-    private void load_out_page() {
+  /*  private void load_out_page() {
 
         StringRequest request=new StringRequest(Request.Method.GET, IN_CARD_LOAD, new Response.Listener<String>() {
             @Override
@@ -191,20 +191,20 @@ public class Game_Hajar extends AppCompatActivity {
                 Toast.makeText(Game_Hajar.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         })
-       /* {
+       *//* {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String>param=new HashMap<>();
 
                 return param;
             }
-        }*/;
+        }*//*;
 
         RequestQueue queue=Volley.newRequestQueue(Game_Hajar.this);
         queue.add(request);
 
 
-    }
+    }*/
 
     private void load_in_page() {
 
@@ -216,13 +216,24 @@ public class Game_Hajar extends AppCompatActivity {
                     JSONArray array=new JSONArray(response);
                         for (int i=0;i<array.length();i++) {
                             JSONObject object = array.getJSONObject(i);
+                            String i_o=object.getString("i_o");
                             String card=object.getString("category");
+
+                            if (i_o.trim().equals("in")){
 
                             Glide.with(getApplicationContext()).load(card)
                                     .thumbnail(0.5f)
                                     .crossFade()
                                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                    .into(image_in);
+                                    .into(image_in);}
+                                    else {
+                                Glide.with(getApplicationContext()).load(card)
+                                        .thumbnail(0.5f)
+                                        .crossFade()
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .into(image_out);}
+
+
                         }
                 } catch (JSONException e) {
                     e.printStackTrace();

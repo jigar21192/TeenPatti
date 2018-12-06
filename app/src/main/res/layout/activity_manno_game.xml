@@ -143,6 +143,7 @@
             android:textSize="17sp" />
 
         <TextView
+            android:id="@+id/m_balance"
             android:layout_width="65dp"
             android:layout_height="19dp"
             android:text="Balance"

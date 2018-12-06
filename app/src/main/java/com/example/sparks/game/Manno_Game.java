@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,7 +33,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -40,6 +44,8 @@ public class Manno_Game extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String KEY_Email = "email";
     public static final String ID= "id";
+    String USER_DETAILS="http://sabkuchhbechde.ga/teenpatti/user_details.php";
+    String LIST_RES="https://www.sabkuchhbechde.ga/teenpatti/mano_res.php";
     String IN_CARD_LOAD="http://sabkuchhbechde.ga/teenpatti/hazar_res.php";
     String BID_URL="http://sabkuchhbechde.ga/teenpatti/bid_details.php";
     SharedPreferences sharedpreferences;
@@ -47,7 +53,12 @@ public class Manno_Game extends AppCompatActivity {
     PopupWindow m_popupWindow,m_popupWindow1;
     RelativeLayout m_relativeLayout;
     Button m_select_card,m_select_money,m_bid;
-    TextView m_username;
+    TextView m_username,m_balance;
+    String name,balance, id;
+
+    List<String>in_list;
+    List<String>out_list;
+    ListView m_lv_in,m_lv_out;
     ImageView m_image_in,m_image_out;
     Timer m_repeatTask;
     @Override
@@ -55,11 +66,14 @@ public class Manno_Game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manno_game);
 
+
+
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         final String user=sharedpreferences.getString("email","");
-        final String id=sharedpreferences.getString("id","");
+        id=sharedpreferences.getString("id","");
 
-
+        m_lv_in=findViewById(R.id.m_lv_in);
+        m_lv_out=findViewById(R.id.m_lv_out);
         m_relativeLayout=findViewById(R.id.m_r1);
         m_linearLayout=findViewById(R.id.linear1);
         m_select_card=findViewById(R.id.m_select_card);
@@ -68,7 +82,8 @@ public class Manno_Game extends AppCompatActivity {
         m_image_in=findViewById(R.id.m_image_in);
         m_image_out=findViewById(R.id.m_image_out);
         m_username=findViewById(R.id.m_user);
-        m_username.setText(user);
+        m_balance=findViewById(R.id.m_balance);
+
 
         m_in_page=findViewById(R.id.m_l3);
         m_out_page=findViewById(R.id.m_l4);
@@ -81,9 +96,60 @@ public class Manno_Game extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
+                        in_list=new ArrayList<>();
+                        out_list=new ArrayList<>();
                         load_in_page();
 
-                        load_out_page();
+
+                        list_view_details();
+
+                       // load_out_page();
+
+                        StringRequest stringRequest=new StringRequest(Request.Method.POST, USER_DETAILS, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONArray array=new JSONArray(response);
+                                    for (int i=0;i<array.length();i++) {
+                                        JSONObject object = array.getJSONObject(i);
+                                        name=object.getString("name");
+                                        balance=object.getString("coin");
+
+
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                m_balance.setText(balance);
+                                m_username.setText(name);
+
+
+                            }
+
+
+
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(Manno_Game.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        })
+                        {
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String,String>param=new HashMap<>();
+                                param.put("id",id);
+
+
+                                return param;
+                            }
+                        };
+                        RequestQueue requestQueue=Volley.newRequestQueue(Manno_Game.this);
+                        requestQueue.add(stringRequest);
+
 
                         Toast.makeText(Manno_Game.this, "hi", Toast.LENGTH_SHORT).show();
 
@@ -153,7 +219,70 @@ public class Manno_Game extends AppCompatActivity {
 
     }
 
-    private void load_out_page() {
+   
+
+    private void list_view_details() {
+        StringRequest request=new StringRequest(Request.Method.GET, LIST_RES, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONArray array=new JSONArray(response);
+                    for (int i=0;i<array.length();i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        String i_o=object.getString("i_o");
+
+
+                        if (i_o.trim().equals("in")){
+
+                            String card=object.getString("category");
+
+
+
+                            in_list.add(card);
+
+
+
+
+
+
+                            }
+
+                        else if (i_o.trim().equals("out")){
+
+                            String card=object.getString("category");
+
+
+
+                            out_list.add(card);
+
+                            Manno_Adapter adapter=new Manno_Adapter(Manno_Game.this,out_list);
+                            m_lv_out.setAdapter(adapter);
+                           }
+
+                        Manno_Adapter adapter=new Manno_Adapter(Manno_Game.this,in_list);
+                        m_lv_in.setAdapter(adapter);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Manno_Game.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        RequestQueue queue=Volley.newRequestQueue(Manno_Game.this);
+        queue.add(request);
+
+    }
+
+   /* private void load_out_page() {
 
         StringRequest request=new StringRequest(Request.Method.GET, IN_CARD_LOAD, new Response.Listener<String>() {
             @Override
@@ -183,20 +312,20 @@ public class Manno_Game extends AppCompatActivity {
                 Toast.makeText(Manno_Game.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         })
-       /* {
+       *//* {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String>param=new HashMap<>();
 
                 return param;
             }
-        }*/;
+        }*//*;
 
         RequestQueue queue=Volley.newRequestQueue(Manno_Game.this);
         queue.add(request);
 
 
-    }
+    }*/
 
     private void load_in_page() {
 
@@ -208,13 +337,24 @@ public class Manno_Game extends AppCompatActivity {
                     JSONArray array=new JSONArray(response);
                     for (int i=0;i<array.length();i++) {
                         JSONObject object = array.getJSONObject(i);
+                        String i_o=object.getString("i_o");
                         String card=object.getString("category");
 
-                        Glide.with(getApplicationContext()).load(card)
-                                .thumbnail(0.5f)
-                                .crossFade()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .into(m_image_in);
+                        if (i_o.trim().equals("in")){
+
+                            Glide.with(getApplicationContext()).load(card)
+                                    .thumbnail(0.5f)
+                                    .crossFade()
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .into(m_image_in);}
+                        else {
+                            Glide.with(getApplicationContext()).load(card)
+                                    .thumbnail(0.5f)
+                                    .crossFade()
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .into(m_image_out);}
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
