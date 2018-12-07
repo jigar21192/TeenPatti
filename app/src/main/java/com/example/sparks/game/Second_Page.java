@@ -104,6 +104,9 @@ public class Second_Page extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent=new Intent(Second_Page.this,Game_Hajar.class);
                 startActivity(intent);
+                finish();
+
+
             }
         });
         manno.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +114,9 @@ public class Second_Page extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent=new Intent(Second_Page.this,Manno_Game.class);
                 startActivity(intent);
+                finish();
+
+
             }
         });
 
@@ -124,6 +130,10 @@ public class Second_Page extends AppCompatActivity {
             public void onClick(View view) {
             Intent intent=new Intent(Second_Page.this,Setting_Activity.class);
             startActivity(intent);
+            finish();
+
+
+
             }
         });
 

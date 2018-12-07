@@ -41,6 +41,7 @@ public class Setting_Activity extends AppCompatActivity {
                 editor.commit();
                 Intent logout=new Intent(Setting_Activity.this,Login.class);
                 startActivity(logout);
+                finish();
             }
         });
 
@@ -69,6 +70,13 @@ public class Setting_Activity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();        //  <<-------ENSURE onStop()
         soundPlayer.oversound();
+
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+       Intent intent=new Intent(Setting_Activity.this,Second_Page.class);
+       startActivity(intent);
     }
 
 

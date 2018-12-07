@@ -541,7 +541,8 @@ public class Manno_Game extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
+        Intent intent=new Intent(Manno_Game.this,Second_Page.class);
+        startActivity(intent);
     }
 
     @Override
@@ -556,6 +557,7 @@ public class Manno_Game extends AppCompatActivity {
         super.onRestart();
         Intent intent=new Intent(Manno_Game.this,Manno_Game.class);
         startActivity(intent);
+        finish();
 
     }
 

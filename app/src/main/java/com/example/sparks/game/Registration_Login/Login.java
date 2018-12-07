@@ -83,6 +83,7 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(Login.this, "Success", Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(Login.this,Second_Page.class);
                             startActivity(intent);
+                            finish();
 
                         }
 
@@ -113,8 +114,11 @@ public class Login extends AppCompatActivity {
         });
 
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
-
-
+}
 
 

@@ -444,7 +444,8 @@ public class Game_Hajar extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
+        Intent intent=new Intent(Game_Hajar.this,Second_Page.class);
+        startActivity(intent);
     }
     @Override
     protected void onStop() {
