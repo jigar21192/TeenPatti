@@ -10,14 +10,32 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Second_Page extends AppCompatActivity {
     ImageView setting;
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String KEY_Email = "email";
+    String USER_DETAILS="http://sabkuchhbechde.ga/teenpatti/user_details.php";
     SharedPreferences sharedpreferences;
     CardView hajar,manno;
-    TextView username;
+    TextView username,bal;
+    String name,balance,id;
    // private SoundPlayer soundPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +44,60 @@ public class Second_Page extends AppCompatActivity {
        // soundPlayer=new SoundPlayer(this);
         setting=findViewById(R.id.setting);
         username=findViewById(R.id.name);
-
+        bal=findViewById(R.id.balance);
         hajar=findViewById(R.id.card1);
         manno=findViewById(R.id.card2);
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         final String user=sharedpreferences.getString("email","");
+        id=sharedpreferences.getString("id","");
 
-        username.setText(user);
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, USER_DETAILS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array=new JSONArray(response);
+                    for (int i=0;i<array.length();i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        name=object.getString("name");
+                        balance=object.getString("coin");
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                bal.setText(balance);
+                username.setText(name);
+
+
+            }
+
+
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Second_Page.this, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+
+
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String>param=new HashMap<>();
+                param.put("id",id);
+
+
+                return param;
+            }
+        };
+        RequestQueue requestQueue=Volley.newRequestQueue(Second_Page.this);
+        requestQueue.add(stringRequest);
+
+
+
 
         hajar.setOnClickListener(new View.OnClickListener() {
             @Override

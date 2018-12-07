@@ -1,6 +1,8 @@
 package com.example.sparks.game;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +46,7 @@ public class Manno_Game extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String KEY_Email = "email";
     public static final String ID= "id";
+    ProgressDialog pd;
     String USER_DETAILS="http://sabkuchhbechde.ga/teenpatti/user_details.php";
     String LIST_RES="https://www.sabkuchhbechde.ga/teenpatti/mano_res.php";
     String IN_CARD_LOAD="http://sabkuchhbechde.ga/teenpatti/hazar_res.php";
@@ -66,6 +69,7 @@ public class Manno_Game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manno_game);
 
+        pd=new ProgressDialog(Manno_Game.this);
 
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -132,7 +136,7 @@ public class Manno_Game extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(Manno_Game.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Manno_Game.this,"Please Check Internet Connection", Toast.LENGTH_SHORT).show();
 
 
                             }
@@ -151,11 +155,11 @@ public class Manno_Game extends AppCompatActivity {
                         requestQueue.add(stringRequest);
 
 
-                        Toast.makeText(Manno_Game.this, "hi", Toast.LENGTH_SHORT).show();
 
                         m_bid.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+
 
                                 final String card=m_select_card.getText().toString();
                                 final String money=m_select_money.getText().toString();
@@ -165,18 +169,28 @@ public class Manno_Game extends AppCompatActivity {
                                 }else if (money.equals("MONEY")){
                                     Toast.makeText(Manno_Game.this, "Select Money", Toast.LENGTH_SHORT).show();
                                 }else {
+                                    pd.setMessage("loading");
+                                    pd.show();
 
                                     StringRequest request=new StringRequest(Request.Method.POST, BID_URL, new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
-                                            Toast.makeText(Manno_Game.this, response, Toast.LENGTH_SHORT).show();
 
+                                            if (response.trim().equals("success")) {
+                                                pd.dismiss();
+                                                Toast.makeText(Manno_Game.this, "BID Success", Toast.LENGTH_SHORT).show();
+                                            }else {
+                                                pd.dismiss();
+                                                Toast.makeText(Manno_Game.this, "Problem On BID", Toast.LENGTH_SHORT).show();
+
+                                            }
 
                                         }
                                     }, new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
-                                            Toast.makeText(Manno_Game.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                                            pd.dismiss();
+                                            Toast.makeText(Manno_Game.this, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
                                         }
                                     })
                                     {
@@ -219,7 +233,7 @@ public class Manno_Game extends AppCompatActivity {
 
     }
 
-   
+
 
     private void list_view_details() {
         StringRequest request=new StringRequest(Request.Method.GET, LIST_RES, new Response.Listener<String>() {
@@ -236,24 +250,12 @@ public class Manno_Game extends AppCompatActivity {
                         if (i_o.trim().equals("in")){
 
                             String card=object.getString("category");
-
-
-
                             in_list.add(card);
-
-
-
-
-
-
                             }
 
                         else if (i_o.trim().equals("out")){
 
                             String card=object.getString("category");
-
-
-
                             out_list.add(card);
 
                             Manno_Adapter adapter=new Manno_Adapter(Manno_Game.this,out_list);
@@ -262,6 +264,8 @@ public class Manno_Game extends AppCompatActivity {
 
                         Manno_Adapter adapter=new Manno_Adapter(Manno_Game.this,in_list);
                         m_lv_in.setAdapter(adapter);
+
+                        adapter.notifyDataSetChanged();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -272,7 +276,7 @@ public class Manno_Game extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Manno_Game.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Manno_Game.this, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -282,50 +286,6 @@ public class Manno_Game extends AppCompatActivity {
 
     }
 
-   /* private void load_out_page() {
-
-        StringRequest request=new StringRequest(Request.Method.GET, IN_CARD_LOAD, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONArray array=new JSONArray(response);
-                    for (int i=0;i<array.length();i++) {
-                        JSONObject object = array.getJSONObject(i);
-                        String card=object.getString("category");
-
-                        Glide.with(getApplicationContext()).load(card)
-                                .thumbnail(0.5f)
-                                .crossFade()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .into(m_image_out);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Manno_Game.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        })
-       *//* {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String>param=new HashMap<>();
-
-                return param;
-            }
-        }*//*;
-
-        RequestQueue queue=Volley.newRequestQueue(Manno_Game.this);
-        queue.add(request);
-
-
-    }*/
 
     private void load_in_page() {
 
@@ -365,7 +325,7 @@ public class Manno_Game extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Manno_Game.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Manno_Game.this,"Please Check Internet Connection", Toast.LENGTH_SHORT).show();
             }
         })
        /* {
@@ -586,13 +546,16 @@ public class Manno_Game extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        super.onStop();        //  <<-------ENSURE onStop()
+        super.onStop();
+        m_repeatTask.cancel();//  <<-------ENSURE onStop()
 
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
+        Intent intent=new Intent(Manno_Game.this,Manno_Game.class);
+        startActivity(intent);
 
     }
 

@@ -2,6 +2,7 @@ package com.example.sparks.game.Registration_Login;
 
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +35,7 @@ public class Login extends AppCompatActivity {
   Button login;
   String Login_URL="http://sabkuchhbechde.ga/teenpatti/android_login.php";
     SharedPreferences sharedPreferences;
+    ProgressDialog pd;
     public static final String MyPREFERENCES = "MyPrefs" ;
 
     public static final String ID = "id";
@@ -43,6 +45,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        pd=new ProgressDialog(Login.this);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -55,6 +58,9 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                pd.setMessage("loading");
+                pd.show();
+
                 final String mail=email.getText().toString();
                 final String pass=password.getText().toString();
 
@@ -62,9 +68,11 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if (response.trim().equals("password_wrong")){
+                            pd.dismiss();
                             Toast.makeText(Login.this, "Wrong Email or Password", Toast.LENGTH_SHORT).show();
 
                         }else {
+                            pd.dismiss();
                             Toast.makeText(Login.this, "Id"+response, Toast.LENGTH_SHORT).show();
                             SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -83,7 +91,8 @@ public class Login extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Login.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                        Toast.makeText(Login.this, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 })
                 {

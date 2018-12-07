@@ -23,6 +23,8 @@
             android:textSize="25sp"
             />
         <ListView
+            android:stackFromBottom="true"
+            android:transcriptMode="normal"
             android:id="@+id/m_lv_in"
             android:layout_width="100dp"
             android:layout_height="match_parent"/>
@@ -117,6 +119,8 @@
             android:textStyle="bold" />
 
         <ListView
+            android:stackFromBottom="true"
+            android:transcriptMode="normal"
             android:id="@+id/m_lv_out"
             android:layout_width="100dp"
             android:layout_height="match_parent" />
@@ -126,7 +130,7 @@
 
     <LinearLayout
         android:layout_width="70dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="12dp"
         android:layout_toEndOf="@+id/m_l1"
@@ -137,12 +141,14 @@
         <TextView
             android:id="@+id/m_user"
             android:layout_width="65dp"
-            android:layout_height="19dp"
+            android:layout_height="23dp"
             android:text="Name"
+            android:gravity="center_vertical"
             android:textColor="@color/txtcolor"
             android:textSize="17sp" />
 
         <TextView
+            android:layout_marginTop="5dp"
             android:id="@+id/m_balance"
             android:layout_width="65dp"
             android:layout_height="19dp"
