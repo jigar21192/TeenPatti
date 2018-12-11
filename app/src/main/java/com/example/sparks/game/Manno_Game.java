@@ -354,6 +354,8 @@ public class Manno_Game extends AppCompatActivity {
         final Button one_thousand=customView.findViewById(R.id.no1000);
         final Button two_thousand=customView.findViewById(R.id.no2000);
         final Button five_thousand=customView.findViewById(R.id.no5000);
+        final Button ten_thousand=customView.findViewById(R.id.no10000);
+        final Button close_amount=customView.findViewById(R.id.close_amount);
 
 
 
@@ -407,6 +409,20 @@ public class Manno_Game extends AppCompatActivity {
                 m_popupWindow1.dismiss();
             }
         });
+        ten_thousand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                m_select_money.setText(ten_thousand.getText().toString());
+                m_popupWindow1.dismiss();
+            }
+        });
+        close_amount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                m_popupWindow1.dismiss();
+            }
+        });
+
 
         //instantiate popup window
         m_popupWindow1 = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -434,6 +450,7 @@ public class Manno_Game extends AppCompatActivity {
         final Button j_card=customView.findViewById(R.id.j_card);
         final Button q_card=customView.findViewById(R.id.q_card);
         final Button k_card=customView.findViewById(R.id.k_card);
+        final Button close_card=customView.findViewById(R.id.close_card);
 
 
         one.setOnClickListener(new View.OnClickListener() {
@@ -524,6 +541,13 @@ public class Manno_Game extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 m_select_card.setText(k_card.getText().toString());
+                m_popupWindow.dismiss();
+            }
+        });
+        close_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
                 m_popupWindow.dismiss();
             }
         });
