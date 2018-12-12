@@ -33,7 +33,7 @@ public class Second_Page extends AppCompatActivity {
     public static final String KEY_Email = "email";
     String USER_DETAILS="http://sabkuchhbechde.ga/teenpatti/user_details.php";
     SharedPreferences sharedpreferences;
-    CardView hajar,manno;
+    CardView hajar,manno,janno;
     TextView username,bal;
     String name,balance,id;
    // private SoundPlayer soundPlayer;
@@ -47,6 +47,7 @@ public class Second_Page extends AppCompatActivity {
         bal=findViewById(R.id.balance);
         hajar=findViewById(R.id.card1);
         manno=findViewById(R.id.card2);
+        janno=findViewById(R.id.card3);
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         final String user=sharedpreferences.getString("email","");
         id=sharedpreferences.getString("id","");
@@ -102,9 +103,11 @@ public class Second_Page extends AppCompatActivity {
         hajar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Second_Page.this,Game_Hajar.class);
+
+                Toast.makeText(Second_Page.this, "Work In Progress", Toast.LENGTH_SHORT).show();
+               /* Intent intent=new Intent(Second_Page.this,Game_Hajar.class);
                 startActivity(intent);
-                finish();
+                finish();*/
 
 
             }
@@ -115,6 +118,18 @@ public class Second_Page extends AppCompatActivity {
                 Intent intent=new Intent(Second_Page.this,Manno_Game.class);
                 startActivity(intent);
                 finish();
+
+
+            }
+        });
+        janno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(Second_Page.this, "Work In Progress", Toast.LENGTH_SHORT).show();
+               /* Intent intent=new Intent(Second_Page.this,Game_Hajar.class);
+                startActivity(intent);
+                finish();*/
 
 
             }
