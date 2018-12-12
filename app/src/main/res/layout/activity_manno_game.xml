@@ -195,5 +195,13 @@
             android:layout_width="50dp"
             android:layout_height="30dp"
             android:text="BID" />
+        <Button
+            android:textColor="@color/btntxtcolor"
+            android:layout_margin="5dp"
+            android:background="@drawable/roundshape"
+            android:id="@+id/history_bid"
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:text="History" />
     </LinearLayout>
 </RelativeLayout>

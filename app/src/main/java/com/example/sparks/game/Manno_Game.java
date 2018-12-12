@@ -56,7 +56,7 @@ public class Manno_Game extends AppCompatActivity {
     LinearLayout m_in_page,m_out_page,m_linearLayout;
     PopupWindow m_popupWindow,m_popupWindow1;
     RelativeLayout m_relativeLayout;
-    Button m_select_card,m_select_money,m_bid;
+    Button m_select_card,m_select_money,m_bid,history_bid;
     TextView m_username,m_balance;
     String name,balance, id;
 
@@ -78,7 +78,7 @@ public class Manno_Game extends AppCompatActivity {
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         final String user=sharedpreferences.getString("email","");
         id=sharedpreferences.getString("id","");
-
+        history_bid=findViewById(R.id.history_bid);
         m_lv_in=findViewById(R.id.m_lv_in);
         m_lv_out=findViewById(R.id.m_lv_out);
         m_relativeLayout=findViewById(R.id.m_r1);
@@ -182,9 +182,14 @@ public class Manno_Game extends AppCompatActivity {
                                             if (response.trim().equals("success")) {
                                                 pd.dismiss();
                                                 Toast.makeText(Manno_Game.this, "BID Success", Toast.LENGTH_SHORT).show();
+                                            }else if (response.trim().equals("Increase_Money")){
+                                                pd.dismiss();
+                                                Toast.makeText(Manno_Game.this, "Increase Your Money", Toast.LENGTH_SHORT).show();
+
                                             }else {
                                                 pd.dismiss();
                                                 Toast.makeText(Manno_Game.this, "Problem On BID", Toast.LENGTH_SHORT).show();
+
 
                                             }
 
@@ -214,6 +219,13 @@ public class Manno_Game extends AppCompatActivity {
                                 }}
                         });
 
+                        history_bid.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                popup_history();
+                            }
+                        });
+
                         m_select_card.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -236,6 +248,27 @@ public class Manno_Game extends AppCompatActivity {
 
     }
 
+    private void popup_history() {
+
+        LayoutInflater layoutInflater = (LayoutInflater) Manno_Game.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View customView = layoutInflater.inflate(R.layout.history_bid_details,null);
+
+
+
+
+            ListView lv=(ListView)customView.findViewById(R.id.lv_history);
+
+
+
+
+        //instantiate popup window
+        m_popupWindow1 = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        //display the popup window
+        m_popupWindow1.showAtLocation(m_relativeLayout, Gravity.CENTER, 0, 0);
+
+
+    }
 
 
     private void list_view_details() {
