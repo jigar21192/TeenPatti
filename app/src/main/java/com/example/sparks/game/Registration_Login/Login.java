@@ -73,14 +73,12 @@ public class Login extends AppCompatActivity {
 
                         }else {
                             pd.dismiss();
-                            Toast.makeText(Login.this, "Id"+response, Toast.LENGTH_SHORT).show();
                             SharedPreferences.Editor editor = sharedPreferences.edit();
 
                             editor.putString(KEY_Email, mail );
                             editor.putString(ID, response );
 
                             editor.commit();
-                            Toast.makeText(Login.this, "Success", Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(Login.this,Second_Page.class);
                             startActivity(intent);
                             finish();
