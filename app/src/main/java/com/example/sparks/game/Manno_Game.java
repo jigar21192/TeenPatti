@@ -54,7 +54,7 @@ public class Manno_Game extends AppCompatActivity {
     String BID_URL="http://sabkuchhbechde.ga/teenpatti/bid_details.php";
     SharedPreferences sharedpreferences;
     LinearLayout m_in_page,m_out_page,m_linearLayout;
-    PopupWindow m_popupWindow,m_popupWindow1;
+    PopupWindow m_popupWindow,m_popupWindow1,m_popupWindow2;
     RelativeLayout m_relativeLayout;
     Button m_select_card,m_select_money,m_bid,history_bid;
     TextView m_username,m_balance;
@@ -62,6 +62,7 @@ public class Manno_Game extends AppCompatActivity {
 
     List<String>in_list;
     List<String>out_list;
+    List<String>bid_history;
     ListView m_lv_in,m_lv_out;
     ImageView m_image_in,m_image_out;
     Timer m_repeatTask;
@@ -106,6 +107,8 @@ public class Manno_Game extends AppCompatActivity {
 
                         in_list=new ArrayList<>();
                         out_list=new ArrayList<>();
+                        bid_history=new ArrayList<>();
+
                         load_in_page();
 
 
@@ -131,8 +134,7 @@ public class Manno_Game extends AppCompatActivity {
                                 m_balance.setText(balance);
                                 m_username.setText(name);
 
-
-                            }
+                                }
 
 
 
@@ -253,19 +255,69 @@ public class Manno_Game extends AppCompatActivity {
         LayoutInflater layoutInflater = (LayoutInflater) Manno_Game.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View customView = layoutInflater.inflate(R.layout.history_bid_details,null);
 
+        final ListView lv=(ListView)customView.findViewById(R.id.lv_history);
+        final Button close=(Button)customView.findViewById(R.id.list_close_btn);
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                m_popupWindow2.dismiss();
+            }
+        });
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, USER_DETAILS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array=new JSONArray(response);
+                    for (int i=0;i<array.length();i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        name=object.getString("name");
+                        balance=object.getString("coin");
+
+                        bid_history.add(name);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Bid_History_Adapter adapter=new Bid_History_Adapter(Manno_Game.this,bid_history);
+                lv.setAdapter(adapter);
+
+
+            }
 
 
 
-            ListView lv=(ListView)customView.findViewById(R.id.lv_history);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Manno_Game.this,"Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+
+
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String>param=new HashMap<>();
+                param.put("id",id);
+
+
+                return param;
+            }
+        };
+        RequestQueue requestQueue=Volley.newRequestQueue(Manno_Game.this);
+        requestQueue.add(stringRequest);
+
 
 
 
 
         //instantiate popup window
-        m_popupWindow1 = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        m_popupWindow2 = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         //display the popup window
-        m_popupWindow1.showAtLocation(m_relativeLayout, Gravity.CENTER, 0, 0);
+        m_popupWindow2.showAtLocation(m_relativeLayout, Gravity.CENTER, 0, 0);
 
 
     }

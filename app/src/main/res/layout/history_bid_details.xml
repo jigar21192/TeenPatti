@@ -1,13 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg4">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:text="Card"
+    android:textColor="@color/txtcolor"
+    android:layout_marginTop="5dp"
+    android:textSize="25sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="Coin"
+        android:textColor="@color/txtcolor"
+        android:textSize="25sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:text="Action"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/txtcolor"
+        android:textSize="25sp"
+        android:layout_alignParentRight="true" />
 
     <ListView
-        android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/lv_history">
 
     </ListView>
+
+    <Button
+        android:id="@+id/list_close_btn"
+        android:text="close"
+        android:background="@drawable/roundshape"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
