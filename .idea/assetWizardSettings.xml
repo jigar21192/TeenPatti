@@ -66,8 +66,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="cropped" value="true" />
-                                      <entry key="outputName" value="ic_setting" />
+                                      <entry key="imageAsset" value="C:\Users\Sparks\Desktop\Iamge\bg4.png" />
+                                      <entry key="outputName" value="bg4" />
                                     </map>
                                   </option>
                                 </PersistentState>

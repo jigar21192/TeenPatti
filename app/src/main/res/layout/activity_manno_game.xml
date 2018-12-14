@@ -60,9 +60,10 @@
             android:layout_width="80dp"
             android:layout_height="90dp"
             android:layout_alignStart="@+id/m_l3"
-            android:layout_alignLeft="@+id/m_l3"
             android:layout_alignBottom="@+id/m_l3"
-            android:src="@drawable/black_a" />
+            android:src="@drawable/black_a"
+            android:layout_alignLeft="@+id/m_l3"
+            tools:ignore="RtlCompat" />
 
     </LinearLayout>
 
