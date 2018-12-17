@@ -264,8 +264,13 @@ public class Manno_Game extends AppCompatActivity {
                     JSONArray array=new JSONArray(response);
                     for (int i=0;i<array.length();i++) {
                         JSONObject object = array.getJSONObject(i);
-                        String i_o=object.getString("i_o");
-                        String card=object.getString("category");
+                        String card1=object.getString("category");
+
+                        Glide.with(getApplicationContext()).load(card1)
+                                .thumbnail(0.5f)
+                                .crossFade()
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(m_image_last);
 
 
 

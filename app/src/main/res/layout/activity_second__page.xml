@@ -47,6 +47,10 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            card_view:cardBackgroundColor="@android:color/transparent"
+            card_view:cardElevation="0dp"
             android:id="@+id/card3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +60,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 
-                android:src="@drawable/casinocoin3"
+                android:src="@drawable/janno"
                />
         </android.support.v7.widget.CardView>
     </LinearLayout>
