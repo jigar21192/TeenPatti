@@ -68,6 +68,7 @@ public class Second_Page extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
                 bal.setText(balance);
                 username.setText(name);
 

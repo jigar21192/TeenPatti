@@ -65,7 +65,7 @@ public class Manno_Game extends AppCompatActivity {
     List<String>out_list;
     List<Manno_DataModel>bid_history;
     ListView m_lv_in,m_lv_out;
-    ImageView m_image_in,m_image_out;
+    ImageView m_image_in,m_image_out,m_image_last;
     Timer m_repeatTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +92,7 @@ public class Manno_Game extends AppCompatActivity {
         m_image_out=findViewById(R.id.m_image_out);
         m_username=findViewById(R.id.m_user);
         m_balance=findViewById(R.id.m_balance);
+        m_image_last=findViewById(R.id.m_image_last);
 
 
         m_in_page=findViewById(R.id.m_l3);
@@ -111,6 +112,7 @@ public class Manno_Game extends AppCompatActivity {
                         bid_history=new ArrayList<>();
 
                         load_in_page();
+                        load_last_card();
 
 
                         list_view_details();
@@ -121,21 +123,23 @@ public class Manno_Game extends AppCompatActivity {
                             @Override
                             public void onResponse(String response) {
                                 try {
-                                    JSONArray array=new JSONArray(response);
-                                    for (int i=0;i<array.length();i++) {
+                                    JSONArray array = new JSONArray(response);
+                                    for (int i = 0; i < array.length(); i++) {
                                         JSONObject object = array.getJSONObject(i);
-                                        name=object.getString("name");
-                                        balance=object.getString("coin");
-
+                                        name = object.getString("name");
+                                        balance = object.getString("coin");
+                                        Log.e(">>>>>",">>>>>"+name);
 
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                m_balance.setText(balance);
-                                m_username.setText(name);
 
-                                }
+                                    m_balance.setText(balance);
+                                    m_username.setText(name);
+
+
+                            }
 
 
 
@@ -250,6 +254,50 @@ public class Manno_Game extends AppCompatActivity {
         }, 0, 5000);
 
     }
+
+    private void load_last_card() {
+        StringRequest request=new StringRequest(Request.Method.GET, IN_CARD_LOAD, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONArray array=new JSONArray(response);
+                    for (int i=0;i<array.length();i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        String i_o=object.getString("i_o");
+                        String card=object.getString("category");
+
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Manno_Game.this,"Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        })
+       /* {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String>param=new HashMap<>();
+
+                return param;
+            }
+        }*/;
+
+        RequestQueue queue=Volley.newRequestQueue(Manno_Game.this);
+        queue.add(request);
+
+
+    }
+
+
 
     public void popup_history() {
 
