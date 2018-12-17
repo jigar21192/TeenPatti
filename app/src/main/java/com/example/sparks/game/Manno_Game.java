@@ -48,6 +48,7 @@ public class Manno_Game extends AppCompatActivity {
     public static final String KEY_Email = "email";
     public static final String ID= "id";
     ProgressDialog pd;
+    String BID_DETAILS="http://sabkuchhbechde.ga/teenpatti/bid_history.php";
     String USER_DETAILS="http://sabkuchhbechde.ga/teenpatti/user_details.php";
     String LIST_RES="https://www.sabkuchhbechde.ga/teenpatti/mano_res.php";
     String IN_CARD_LOAD="http://sabkuchhbechde.ga/teenpatti/hazar_res.php";
@@ -58,11 +59,11 @@ public class Manno_Game extends AppCompatActivity {
     RelativeLayout m_relativeLayout;
     Button m_select_card,m_select_money,m_bid,history_bid;
     TextView m_username,m_balance;
-    String name,balance, id;
+    String name,balance, id,card_id,card_number,card_money;
 
     List<String>in_list;
     List<String>out_list;
-    List<String>bid_history;
+    List<Manno_DataModel>bid_history;
     ListView m_lv_in,m_lv_out;
     ImageView m_image_in,m_image_out;
     Timer m_repeatTask;
@@ -250,7 +251,7 @@ public class Manno_Game extends AppCompatActivity {
 
     }
 
-    private void popup_history() {
+    public void popup_history() {
 
         LayoutInflater layoutInflater = (LayoutInflater) Manno_Game.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View customView = layoutInflater.inflate(R.layout.history_bid_details,null);
@@ -264,17 +265,23 @@ public class Manno_Game extends AppCompatActivity {
                 m_popupWindow2.dismiss();
             }
         });
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, USER_DETAILS, new Response.Listener<String>() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, BID_DETAILS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONArray array=new JSONArray(response);
                     for (int i=0;i<array.length();i++) {
                         JSONObject object = array.getJSONObject(i);
-                        name=object.getString("name");
-                        balance=object.getString("coin");
+                        card_id=object.getString("id");
+                        card_number=object.getString("card_number");
+                        card_money=object.getString("money");
 
-                        bid_history.add(name);
+                        Manno_DataModel dm=new Manno_DataModel();
+                        dm.setCard_id(card_id);
+                        dm.setCard_number(card_number);
+                        dm.setCard_money(card_money);
+
+                        bid_history.add(dm);
 
                     }
                 } catch (JSONException e) {
@@ -282,6 +289,7 @@ public class Manno_Game extends AppCompatActivity {
                 }
                 Bid_History_Adapter adapter=new Bid_History_Adapter(Manno_Game.this,bid_history);
                 lv.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
 
 
             }

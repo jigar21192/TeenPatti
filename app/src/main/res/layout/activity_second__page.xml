@@ -2,49 +2,53 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/bg4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg4"
     tools:context=".Second_Page">
 
     <LinearLayout
         android:id="@+id/l1"
         android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
         <android.support.v7.widget.CardView
             android:id="@+id/card1"
-            android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
+            android:layout_margin="10dp">
+
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:src="@drawable/casinocoin1" />
         </android.support.v7.widget.CardView>
+
         <android.support.v7.widget.CardView
             android:id="@+id/card2"
-            android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
+            android:layout_margin="10dp">
+
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/casinocoin2" />
+                android:src="@drawable/manno" />
         </android.support.v7.widget.CardView>
+
         <android.support.v7.widget.CardView
             android:id="@+id/card3"
-            android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
+            android:layout_margin="10dp">
+
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                
                 android:src="@drawable/casinocoin3"
-                tools:srcCompat="@drawable/casinocoin3" />
+               />
         </android.support.v7.widget.CardView>
     </LinearLayout>
 
@@ -54,12 +58,12 @@
         android:layout_width="200dp"
         android:layout_height="25sp"
         android:layout_alignStart="@+id/l1"
+        android:layout_alignLeft="@+id/l1"
         android:layout_alignTop="@+id/setting"
         android:layout_marginTop="8dp"
         android:text="Name"
         android:textColor="@color/txtcolor"
-        android:textSize="20sp"
-        android:layout_alignLeft="@+id/l1" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/balance"
@@ -88,7 +92,6 @@
         android:layout_marginRight="73dp"
         android:layout_marginBottom="22dp"
         android:src="@mipmap/ic_setting" />
-
 
 
 </RelativeLayout>
