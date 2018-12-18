@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/bg4"
     android:layout_height="match_parent"
-    tools:context=".Manno_Game">
+    tools:context="com.idea.sparks.fungame.Manno_Game">
     <LinearLayout
         android:id="@+id/m_l1"
         android:layout_width="wrap_content"
@@ -209,11 +209,11 @@
         <Button
             android:textColor="@color/btntxtcolor"
             android:layout_margin="5dp"
-            android:id="@+id/m_select_money"
+            android:id="@+id/m_select_coin"
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:background="@drawable/roundshape"
-            android:text="MONEY" />
+            android:text="COIN" />
 
         <Button
             android:textColor="@color/btntxtcolor"

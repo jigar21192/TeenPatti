@@ -1,4 +1,4 @@
-package com.example.sparks.game;
+package fungame.idea.sparks.fungame;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import fungame.idea.sparks.fungame.R;
 
 import java.util.List;
 

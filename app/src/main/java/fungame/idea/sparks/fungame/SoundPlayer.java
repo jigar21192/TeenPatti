@@ -1,9 +1,10 @@
-package com.example.sparks.game;
+package fungame.idea.sparks.fungame;
 
 import android.content.Context;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+
+import fungame.idea.sparks.fungame.R;
 
 public class SoundPlayer {
     private static SoundPool soundPool;

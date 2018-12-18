@@ -5,7 +5,7 @@
     android:background="@drawable/bg4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registration_Login.Login">
+    tools:context="com.idea.sparks.fungame.Registration_Login.Login">
 <ImageView
     android:layout_width="100dp"
     android:layout_height="100dp"

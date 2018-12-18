@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg4"
-    tools:context=".Second_Page">
+    tools:context="com.idea.sparks.fungame.Second_Page">
 
     <LinearLayout
         android:id="@+id/l1"

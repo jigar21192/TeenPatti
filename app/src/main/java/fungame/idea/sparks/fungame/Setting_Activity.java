@@ -1,4 +1,4 @@
-package com.example.sparks.game;
+package fungame.idea.sparks.fungame;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sparks.game.Registration_Login.Login;
+
+import fungame.idea.sparks.fungame.R;
+
+import fungame.idea.sparks.fungame.Registration_Login.Login;
 
 public class Setting_Activity extends AppCompatActivity {
     private SoundPlayer soundPlayer;

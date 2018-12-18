@@ -1,10 +1,8 @@
-package com.example.sparks.game;
+package fungame.idea.sparks.fungame;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -29,7 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.sparks.game.Registration_Login.Login;
+import fungame.idea.sparks.fungame.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,7 +48,7 @@ public class Game_Hajar extends AppCompatActivity {
     LinearLayout in_page,out_page,linearLayout;
     PopupWindow popupWindow,popupWindow1;
     RelativeLayout relativeLayout;
-    Button select_card,select_money,bid;
+    Button select_card,select_coin,bid;
     TextView username;
     ImageView image_in,image_out;
     ToggleButton toggleButton;
@@ -69,7 +67,7 @@ public class Game_Hajar extends AppCompatActivity {
         relativeLayout=findViewById(R.id.r1);
         linearLayout=findViewById(R.id.linear1);
         select_card=findViewById(R.id.select_card);
-        select_money=findViewById(R.id.select_money);
+        select_coin=findViewById(R.id.select_coin);
         bid=findViewById(R.id.bid);
         image_in=findViewById(R.id.image_in);
         image_out=findViewById(R.id.image_out);
@@ -98,12 +96,12 @@ public class Game_Hajar extends AppCompatActivity {
             public void onClick(View view) {
 
                 final String card=select_card.getText().toString();
-                final String money=select_money.getText().toString();
+                final String coin=select_coin.getText().toString();
                 final String in_out=toggleButton.getText().toString();
 
                 if (card.equals("CARD")){
                     Toast.makeText(Game_Hajar.this, "Select any Card", Toast.LENGTH_SHORT).show();
-                }else if (money.equals("MONEY")){
+                }else if (coin.equals("MONEY")){
                     Toast.makeText(Game_Hajar.this, "Select Money", Toast.LENGTH_SHORT).show();
                     }else {
 
@@ -127,7 +125,7 @@ public class Game_Hajar extends AppCompatActivity {
                         param.put("id",id);
                         param.put("in_out",in_out);
                         param.put("card_number",card);
-                        param.put("money",money);
+                        param.put("money",coin);
                         return param;
                     }
                 };
@@ -146,7 +144,7 @@ public class Game_Hajar extends AppCompatActivity {
                popup();
             }
         });
-        select_money.setOnClickListener(new View.OnClickListener() {
+        select_coin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //instantiate the popup.xml layout file
@@ -280,49 +278,49 @@ public class Game_Hajar extends AppCompatActivity {
         hundred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_money.setText(hundred.getText().toString());
+                select_coin.setText(hundred.getText().toString());
                 popupWindow1.dismiss();
             }
         });
         two_hundred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_money.setText(two_hundred.getText().toString());
+                select_coin.setText(two_hundred.getText().toString());
                 popupWindow1.dismiss();
             }
         });
         three_hundred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_money.setText(three_hundred.getText().toString());
+                select_coin.setText(three_hundred.getText().toString());
                 popupWindow1.dismiss();
             }
         });
         five_hundred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_money.setText(five_hundred.getText().toString());
+                select_coin.setText(five_hundred.getText().toString());
                 popupWindow1.dismiss();
             }
         });
         one_thousand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_money.setText(one_thousand.getText().toString());
+                select_coin.setText(one_thousand.getText().toString());
                 popupWindow1.dismiss();
             }
         });
         two_thousand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_money.setText(two_thousand.getText().toString());
+                select_coin.setText(two_thousand.getText().toString());
                 popupWindow1.dismiss();
             }
         });
         five_thousand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_money.setText(five_thousand.getText().toString());
+                select_coin.setText(five_thousand.getText().toString());
                 popupWindow1.dismiss();
             }
         });

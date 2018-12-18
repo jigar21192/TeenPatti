@@ -1,4 +1,4 @@
-package com.example.sparks.game.Registration_Login;
+package fungame.idea.sparks.fungame.Registration_Login;
 
 
 
@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -22,8 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.sparks.game.R;
-import com.example.sparks.game.Second_Page;
+import fungame.idea.sparks.fungame.R;
+import fungame.idea.sparks.fungame.Second_Page;
 
 import java.util.HashMap;
 import java.util.Map;

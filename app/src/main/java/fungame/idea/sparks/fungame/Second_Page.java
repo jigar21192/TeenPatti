@@ -1,4 +1,4 @@
-package com.example.sparks.game;
+package fungame.idea.sparks.fungame;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import fungame.idea.sparks.fungame.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

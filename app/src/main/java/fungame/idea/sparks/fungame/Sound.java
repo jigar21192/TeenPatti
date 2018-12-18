@@ -1,4 +1,4 @@
-package com.example.sparks.game;
+package fungame.idea.sparks.fungame;
 
 import android.app.Service;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
-import com.example.sparks.game.R;
+import fungame.idea.sparks.fungame.R;
 
 public class Sound  extends Service {
     MediaPlayer myPlayer;

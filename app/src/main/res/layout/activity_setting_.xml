@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Setting_Activity"
+    tools:context="com.idea.sparks.fungame.Setting_Activity"
     android:background="@drawable/bg4">
 <TextView
     android:textColor="@color/txtcolor"

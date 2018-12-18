@@ -1,4 +1,4 @@
-package com.example.sparks.game;
+package fungame.idea.sparks.fungame;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import com.example.sparks.game.Registration_Login.Login;
+import fungame.idea.sparks.fungame.R;
 
-import static com.example.sparks.game.Registration_Login.Login.KEY_Email;
+import fungame.idea.sparks.fungame.Registration_Login.Login;
+
+
 
 public class SplashScreen extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs" ;

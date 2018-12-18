@@ -1,7 +1,7 @@
-package com.example.sparks.game;
+package fungame.idea.sparks.fungame;
 
 public class Manno_DataModel {
-    String card_id,card_number,card_money;
+    String card_id,card_number,card_coin;
 
     public String getCard_id() {
         return card_id;
@@ -20,10 +20,10 @@ public class Manno_DataModel {
     }
 
     public String getCard_money() {
-        return card_money;
+        return card_coin;
     }
 
-    public void setCard_money(String card_money) {
-        this.card_money = card_money;
+    public void setCard_coin(String card_coin) {
+        this.card_coin = card_coin;
     }
 }

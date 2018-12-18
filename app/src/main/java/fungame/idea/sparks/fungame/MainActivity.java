@@ -1,7 +1,9 @@
-package com.example.sparks.game;
+package fungame.idea.sparks.fungame;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import fungame.idea.sparks.fungame.R;
 
 public class MainActivity extends AppCompatActivity {
 

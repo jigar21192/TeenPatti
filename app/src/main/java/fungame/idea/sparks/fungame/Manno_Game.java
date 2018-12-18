@@ -1,4 +1,4 @@
-package com.example.sparks.game;
+package fungame.idea.sparks.fungame;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,7 +20,6 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -31,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import fungame.idea.sparks.fungame.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,9 +57,9 @@ public class Manno_Game extends AppCompatActivity {
     LinearLayout m_in_page,m_out_page,m_linearLayout;
     PopupWindow m_popupWindow,m_popupWindow1,m_popupWindow2;
     RelativeLayout m_relativeLayout;
-    Button m_select_card,m_select_money,m_bid,history_bid;
+    Button m_select_card,m_select_coin,m_bid,history_bid;
     TextView m_username,m_balance;
-    String name,balance, id,card_id,card_number,card_money;
+    String name,balance, id,card_id,card_number,card_coin;
 
     List<String>in_list;
     List<String>out_list;
@@ -86,7 +86,7 @@ public class Manno_Game extends AppCompatActivity {
         m_relativeLayout=findViewById(R.id.m_r1);
         m_linearLayout=findViewById(R.id.linear1);
         m_select_card=findViewById(R.id.m_select_card);
-        m_select_money=findViewById(R.id.m_select_money);
+        m_select_coin=findViewById(R.id.m_select_coin);
         m_bid=findViewById(R.id.m_bid);
         m_image_in=findViewById(R.id.m_image_in);
         m_image_out=findViewById(R.id.m_image_out);
@@ -172,11 +172,11 @@ public class Manno_Game extends AppCompatActivity {
 
 
                                 final String card=m_select_card.getText().toString();
-                                final String money=m_select_money.getText().toString();
+                                final String coin=m_select_coin.getText().toString();
 
                                 if (card.equals("CARD")){
                                     Toast.makeText(Manno_Game.this, "Select any Card", Toast.LENGTH_SHORT).show();
-                                }else if (money.equals("MONEY")){
+                                }else if (coin.equals("MONEY")){
                                     Toast.makeText(Manno_Game.this, "Select Money", Toast.LENGTH_SHORT).show();
                                 }else {
                                     pd.setMessage("loading");
@@ -191,9 +191,14 @@ public class Manno_Game extends AppCompatActivity {
                                                 Toast.makeText(Manno_Game.this, "BID Success", Toast.LENGTH_SHORT).show();
                                             }else if (response.trim().equals("Increase_Money")){
                                                 pd.dismiss();
-                                                Toast.makeText(Manno_Game.this, "Increase Your Money", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(Manno_Game.this, "Increase Your Coin", Toast.LENGTH_SHORT).show();
 
-                                            }else {
+                                            }else if(response.trim().equals("Wait For Game Start")){
+
+                                                pd.dismiss();
+                                                Toast.makeText(Manno_Game.this, "Game Not Started", Toast.LENGTH_SHORT).show();
+
+                                                }else {
                                                 pd.dismiss();
                                                 Toast.makeText(Manno_Game.this, "Problem On BID", Toast.LENGTH_SHORT).show();
 
@@ -214,7 +219,7 @@ public class Manno_Game extends AppCompatActivity {
                                             Map<String,String>param=new HashMap<>();
                                             param.put("id",id);
                                             param.put("card_number",card);
-                                            param.put("money",money);
+                                            param.put("money",coin);
                                             return param;
                                         }
                                     };
@@ -240,7 +245,7 @@ public class Manno_Game extends AppCompatActivity {
                                 popup();
                             }
                         });
-                        m_select_money.setOnClickListener(new View.OnClickListener() {
+                        m_select_coin.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 //instantiate the popup.xml layout file
@@ -327,12 +332,12 @@ public class Manno_Game extends AppCompatActivity {
                         JSONObject object = array.getJSONObject(i);
                         card_id=object.getString("id");
                         card_number=object.getString("card_number");
-                        card_money=object.getString("money");
+                        card_coin=object.getString("money");
 
                         Manno_DataModel dm=new Manno_DataModel();
                         dm.setCard_id(card_id);
                         dm.setCard_number(card_number);
-                        dm.setCard_money(card_money);
+                        dm.setCard_coin(card_coin);
 
                         bid_history.add(dm);
 
@@ -512,56 +517,56 @@ public class Manno_Game extends AppCompatActivity {
         hundred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m_select_money.setText(hundred.getText().toString());
+                m_select_coin.setText(hundred.getText().toString());
                 m_popupWindow1.dismiss();
             }
         });
         two_hundred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m_select_money.setText(two_hundred.getText().toString());
+                m_select_coin.setText(two_hundred.getText().toString());
                 m_popupWindow1.dismiss();
             }
         });
         three_hundred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m_select_money.setText(three_hundred.getText().toString());
+                m_select_coin.setText(three_hundred.getText().toString());
                 m_popupWindow1.dismiss();
             }
         });
         five_hundred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m_select_money.setText(five_hundred.getText().toString());
+                m_select_coin.setText(five_hundred.getText().toString());
                 m_popupWindow1.dismiss();
             }
         });
         one_thousand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m_select_money.setText(one_thousand.getText().toString());
+                m_select_coin.setText(one_thousand.getText().toString());
                 m_popupWindow1.dismiss();
             }
         });
         two_thousand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m_select_money.setText(two_thousand.getText().toString());
+                m_select_coin.setText(two_thousand.getText().toString());
                 m_popupWindow1.dismiss();
             }
         });
         five_thousand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m_select_money.setText(five_thousand.getText().toString());
+                m_select_coin.setText(five_thousand.getText().toString());
                 m_popupWindow1.dismiss();
             }
         });
         ten_thousand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m_select_money.setText(ten_thousand.getText().toString());
+                m_select_coin.setText(ten_thousand.getText().toString());
                 m_popupWindow1.dismiss();
             }
         });

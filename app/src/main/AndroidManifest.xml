@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.sparks.game">
+    package="fungame.idea.sparks.fungame">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".SplashScreen"
+            android:name="fungame.idea.sparks.fungame.SplashScreen"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,24 +23,25 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity" />
+        <activity android:name="fungame.idea.sparks.fungame.MainActivity" />
         <activity
-            android:name=".Second_Page"
+            android:name="fungame.idea.sparks.fungame.Second_Page"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Setting_Activity"
+            android:name="fungame.idea.sparks.fungame.Setting_Activity"
             android:screenOrientation="landscape" />
 
-        <service android:name=".Sound" />
+        <service android:name="fungame.idea.sparks.fungame.Sound" />
 
         <activity
-            android:name=".Registration_Login.Login"
+            android:name="fungame.idea.sparks.fungame.Registration_Login.Login"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Game_Hajar"
+            android:name="fungame.idea.sparks.fungame.Game_Hajar"
             android:screenOrientation="landscape" />
-        <activity android:name=".Manno_Game"
-            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name="fungame.idea.sparks.fungame.Manno_Game"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>
