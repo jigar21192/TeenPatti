@@ -53,6 +53,7 @@ public class Manno_Game extends AppCompatActivity {
     String LIST_RES="https://www.sabkuchhbechde.ga/teenpatti/mano_res.php";
     String IN_CARD_LOAD="http://sabkuchhbechde.ga/teenpatti/hazar_res.php";
     String BID_URL="http://sabkuchhbechde.ga/teenpatti/bid_details.php";
+    String Last_Card="https://www.sabkuchhbechde.ga/teenpatti/last_card.php";
     SharedPreferences sharedpreferences;
     LinearLayout m_in_page,m_out_page,m_linearLayout;
     PopupWindow m_popupWindow,m_popupWindow1,m_popupWindow2;
@@ -261,7 +262,7 @@ public class Manno_Game extends AppCompatActivity {
     }
 
     private void load_last_card() {
-        StringRequest request=new StringRequest(Request.Method.GET, IN_CARD_LOAD, new Response.Listener<String>() {
+        StringRequest request=new StringRequest(Request.Method.GET, Last_Card, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 

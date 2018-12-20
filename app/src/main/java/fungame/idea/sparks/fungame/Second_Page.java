@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -81,7 +82,8 @@ public class Second_Page extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Second_Page.this, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(Second_Page.this, "Server Problem", Toast.LENGTH_SHORT).show();
 
 
             }
