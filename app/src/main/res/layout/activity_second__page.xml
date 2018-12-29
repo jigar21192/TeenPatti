@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg4"
-    tools:context="com.idea.sparks.fungame.Second_Page">
+    tools:context="fungame.idea.sparks.fungame.Second_Page">
 
     <LinearLayout
         android:id="@+id/l1"
@@ -74,6 +74,7 @@
         android:layout_alignLeft="@+id/l1"
         android:layout_alignTop="@+id/setting"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/fontrec"
         android:text="Name"
         android:textColor="@color/txtcolor"
         android:textSize="20sp" />
@@ -88,6 +89,7 @@
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="37dp"
+        android:fontFamily="@font/fontrec"
         android:text="Balance"
         android:textColor="@color/txtcolor"
         android:textSize="20sp" />

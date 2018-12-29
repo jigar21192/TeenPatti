@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import fungame.idea.sparks.fungame.R;
 
@@ -48,18 +50,21 @@ public class Manno_Game extends AppCompatActivity {
     public static final String KEY_Email = "email";
     public static final String ID= "id";
     ProgressDialog pd;
+
+    String c_id1;
     String BID_DETAILS="http://sabkuchhbechde.ga/teenpatti/bid_history.php";
     String USER_DETAILS="http://sabkuchhbechde.ga/teenpatti/user_details.php";
     String LIST_RES="https://www.sabkuchhbechde.ga/teenpatti/mano_res.php";
     String IN_CARD_LOAD="http://sabkuchhbechde.ga/teenpatti/hazar_res.php";
     String BID_URL="http://sabkuchhbechde.ga/teenpatti/bid_details.php";
     String Last_Card="https://www.sabkuchhbechde.ga/teenpatti/last_card.php";
+    String AUTO="https://www.sabkuchhbechde.ga/teenpatti/auto.php";
     SharedPreferences sharedpreferences;
     LinearLayout m_in_page,m_out_page,m_linearLayout;
     PopupWindow m_popupWindow,m_popupWindow1,m_popupWindow2;
     RelativeLayout m_relativeLayout;
     Button m_select_card,m_select_coin,m_bid,history_bid;
-    TextView m_username,m_balance;
+    TextView m_username,m_balance,counter_1,counter_2;
     String name,balance, id,card_id,card_number,card_coin;
 
     List<String>in_list;
@@ -73,6 +78,7 @@ public class Manno_Game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manno_game);
 
+
         pd=new ProgressDialog(Manno_Game.this);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -82,6 +88,9 @@ public class Manno_Game extends AppCompatActivity {
         final String user=sharedpreferences.getString("email","");
         id=sharedpreferences.getString("id","");
         history_bid=findViewById(R.id.history_bid);
+        counter_1=findViewById(R.id.m_txt8);
+        counter_2=findViewById(R.id.m_txt9);
+
         m_lv_in=findViewById(R.id.m_lv_in);
         m_lv_out=findViewById(R.id.m_lv_out);
         m_relativeLayout=findViewById(R.id.m_r1);
@@ -100,6 +109,10 @@ public class Manno_Game extends AppCompatActivity {
         m_out_page=findViewById(R.id.m_l4);
 
 
+
+
+
+
         m_repeatTask = new Timer();
         m_repeatTask.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -107,13 +120,18 @@ public class Manno_Game extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
+                       // load_auto();
+                        load_last_card();
+                        load_in_page();
                         in_list=new ArrayList<>();
                         out_list=new ArrayList<>();
                         bid_history=new ArrayList<>();
 
-                        load_in_page();
-                        load_last_card();
+
+                        Log.e("Repeat  task",">>>>"+"hi");
+
+
+
 
 
                         list_view_details();
@@ -167,102 +185,134 @@ public class Manno_Game extends AppCompatActivity {
 
 
 
-                        m_bid.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-
-
-                                final String card=m_select_card.getText().toString();
-                                final String coin=m_select_coin.getText().toString();
-
-                                if (card.equals("CARD")){
-                                    Toast.makeText(Manno_Game.this, "Select any Card", Toast.LENGTH_SHORT).show();
-                                }else if (coin.equals("MONEY")){
-                                    Toast.makeText(Manno_Game.this, "Select Money", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    pd.setMessage("loading");
-                                    pd.show();
-
-                                    StringRequest request=new StringRequest(Request.Method.POST, BID_URL, new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-
-                                            if (response.trim().equals("success")) {
-                                                pd.dismiss();
-                                                Toast.makeText(Manno_Game.this, "BID Success", Toast.LENGTH_SHORT).show();
-                                            }else if (response.trim().equals("Increase_Money")){
-                                                pd.dismiss();
-                                                Toast.makeText(Manno_Game.this, "Increase Your Coin", Toast.LENGTH_SHORT).show();
-
-                                            }else if(response.trim().equals("Wait For Game Start")){
-
-                                                pd.dismiss();
-                                                Toast.makeText(Manno_Game.this, "Game Not Started", Toast.LENGTH_SHORT).show();
-
-                                                }else {
-                                                pd.dismiss();
-                                                Toast.makeText(Manno_Game.this, "Problem On BID", Toast.LENGTH_SHORT).show();
-
-
-                                            }
-
-                                        }
-                                    }, new Response.ErrorListener() {
-                                        @Override
-                                        public void onErrorResponse(VolleyError error) {
-                                            pd.dismiss();
-                                            Toast.makeText(Manno_Game.this, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
-                                        }
-                                    })
-                                    {
-                                        @Override
-                                        protected Map<String, String> getParams() throws AuthFailureError {
-                                            Map<String,String>param=new HashMap<>();
-                                            param.put("id",id);
-                                            param.put("card_number",card);
-                                            param.put("money",coin);
-                                            return param;
-                                        }
-                                    };
-
-                                    RequestQueue queue=Volley.newRequestQueue(Manno_Game.this);
-                                    queue.add(request);
-
-
-                                }}
-                        });
-
-                        history_bid.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                popup_history();
-                            }
-                        });
-
-                        m_select_card.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                //instantiate the popup.xml layout file
-                                popup();
-                            }
-                        });
-                        m_select_coin.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                //instantiate the popup.xml layout file
-                                popup_money();
-                            }
-                        });
 
                     }
                 });
             }
         }, 0, 5000);
 
+
+        m_bid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+
+                final String card=m_select_card.getText().toString();
+                final String coin=m_select_coin.getText().toString();
+
+                if (card.equals("CARD")){
+                    Toast.makeText(Manno_Game.this, "Select any Card", Toast.LENGTH_SHORT).show();
+                }else if (coin.equals("MONEY")){
+                    Toast.makeText(Manno_Game.this, "Select Money", Toast.LENGTH_SHORT).show();
+                }else {
+                    pd.setMessage("loading");
+                    pd.show();
+
+                    StringRequest request=new StringRequest(Request.Method.POST, BID_URL, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            if (response.trim().equals("success")) {
+                                pd.dismiss();
+                                Toast.makeText(Manno_Game.this, "BID Success", Toast.LENGTH_SHORT).show();
+                            }else if (response.trim().equals("Increase_Money")){
+                                pd.dismiss();
+                                Toast.makeText(Manno_Game.this, "Increase Your Coin", Toast.LENGTH_SHORT).show();
+
+                            }else if(response.trim().equals("Wait For Game Start")){
+
+                                pd.dismiss();
+                                Toast.makeText(Manno_Game.this, "Game Not Started", Toast.LENGTH_SHORT).show();
+
+                            }else {
+                                pd.dismiss();
+                                Toast.makeText(Manno_Game.this, "Problem On BID", Toast.LENGTH_SHORT).show();
+
+
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            pd.dismiss();
+                            Toast.makeText(Manno_Game.this, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    {
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String,String>param=new HashMap<>();
+                            param.put("id",id);
+                            param.put("card_number",card);
+                            param.put("money",coin);
+                            return param;
+                        }
+                    };
+
+                    RequestQueue queue=Volley.newRequestQueue(Manno_Game.this);
+                    queue.add(request);
+
+
+                }}
+        });
+
+        history_bid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popup_history();
+            }
+        });
+
+        m_select_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //instantiate the popup.xml layout file
+                popup();
+            }
+        });
+        m_select_coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //instantiate the popup.xml layout file
+                popup_money();
+            }
+        });
+
     }
 
+    private void load_auto() {
+        StringRequest request1=new StringRequest(Request.Method.GET, AUTO, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+                }
+
+
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Manno_Game.this,"Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        RequestQueue queue=Volley.newRequestQueue(Manno_Game.this);
+        queue.add(request1);
+
+
+    }
+
+
+
+
+
     private void load_last_card() {
-        StringRequest request=new StringRequest(Request.Method.GET, Last_Card, new Response.Listener<String>() {
+        StringRequest request2=new StringRequest(Request.Method.GET, Last_Card, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -274,6 +324,7 @@ public class Manno_Game extends AppCompatActivity {
 
                         Glide.with(getApplicationContext()).load(card1)
                                 .thumbnail(0.5f)
+                                .override(80,90)
                                 .crossFade()
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(m_image_last);
@@ -303,7 +354,7 @@ public class Manno_Game extends AppCompatActivity {
         }*/;
 
         RequestQueue queue=Volley.newRequestQueue(Manno_Game.this);
-        queue.add(request);
+        queue.add(request2);
 
 
     }
@@ -322,9 +373,10 @@ public class Manno_Game extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 m_popupWindow2.dismiss();
+                bid_history.clear();
             }
         });
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, BID_DETAILS, new Response.Listener<String>() {
+        StringRequest stringRequest3=new StringRequest(Request.Method.POST, BID_DETAILS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -374,7 +426,7 @@ public class Manno_Game extends AppCompatActivity {
             }
         };
         RequestQueue requestQueue=Volley.newRequestQueue(Manno_Game.this);
-        requestQueue.add(stringRequest);
+        requestQueue.add(stringRequest3);
 
 
 
@@ -391,9 +443,11 @@ public class Manno_Game extends AppCompatActivity {
 
 
     private void list_view_details() {
-        StringRequest request=new StringRequest(Request.Method.GET, LIST_RES, new Response.Listener<String>() {
+        StringRequest request4=new StringRequest(Request.Method.GET, LIST_RES, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.e("Res",">>>>"+response);
+
 
                 try {
                     JSONArray array=new JSONArray(response);
@@ -437,40 +491,59 @@ public class Manno_Game extends AppCompatActivity {
 
 
         RequestQueue queue=Volley.newRequestQueue(Manno_Game.this);
-        queue.add(request);
+        queue.add(request4);
 
     }
 
 
     private void load_in_page() {
 
-        StringRequest request=new StringRequest(Request.Method.GET, IN_CARD_LOAD, new Response.Listener<String>() {
+        StringRequest request5=new StringRequest(Request.Method.GET, IN_CARD_LOAD, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
 
                 try {
                     JSONArray array=new JSONArray(response);
                     for (int i=0;i<array.length();i++) {
                         JSONObject object = array.getJSONObject(i);
-                        String i_o=object.getString("i_o");
-                        String card=object.getString("category");
+                        String c_id = object.getString("c_id");
 
-                        if (i_o.trim().equals("in")){
-
-                            Glide.with(getApplicationContext()).load(card)
-                                    .thumbnail(0.5f)
-                                    .crossFade()
-                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                    .into(m_image_in);}
-                        else {
-                            Glide.with(getApplicationContext()).load(card)
-                                    .thumbnail(0.5f)
-                                    .crossFade()
-                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                    .into(m_image_out);}
+                        String i_o = object.getString("i_o");
+                        String card = object.getString("category");
+                        String counter = object.getString("counter");
+                        String msg = object.getString("msg");
 
 
-                    }
+
+
+                            if (i_o.trim().equals("in")) {
+                                counter_2.setText(counter);
+
+                                Glide.with(getApplicationContext()).load(card)
+                                        .thumbnail(0.5f)
+                                        .override(80,90)
+                                        .crossFade()
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .into(m_image_in);
+                            } else {
+
+                                counter_1.setText(counter);
+
+                                Glide.with(getApplicationContext()).load(card)
+                                        .thumbnail(0.5f)
+                                        .override(80,90)
+                                        .crossFade()
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .into(m_image_out);
+                            }
+                            if (msg.equals("new_game")){
+                                Toast.makeText(Manno_Game.this, "New Game Start", Toast.LENGTH_LONG).show();
+                            }
+
+
+                        }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -493,7 +566,7 @@ public class Manno_Game extends AppCompatActivity {
         }*/;
 
         RequestQueue queue=Volley.newRequestQueue(Manno_Game.this);
-        queue.add(request);
+        queue.add(request5);
 
 
     }

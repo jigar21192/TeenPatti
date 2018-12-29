@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.idea.sparks.fungame.Setting_Activity"
+    android:id="@+id/l7"
+    android:orientation="vertical"
+    tools:context="fungame.idea.sparks.fungame.Setting_Activity"
     android:background="@drawable/bg4">
 <TextView
     android:textColor="@color/txtcolor"
@@ -18,55 +20,58 @@
 
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/acc"
+
         android:text="LogOut"
         android:textColor="@color/txtcolor"
         android:textSize="25sp"
         android:id="@+id/logout"/>
+
     <TextView
-        android:textColor="@color/txtcolor"
-        android:textStyle="bold"
+        android:id="@+id/change_password"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/logout"
-        android:text="Sound"
+
+        android:text="Change Password"
+        android:textColor="@color/txtcolor"
         android:textSize="25sp"
-        android:id="@+id/sound"/>
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/sound"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:text="Sound"
+        android:textColor="@color/txtcolor"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
     <Switch
-        android:layout_marginEnd="10dp"
+        android:id="@+id/soundswitch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sound"
-        android:textSize="25sp"
+
         android:text="On/Off"
         android:textColor="@color/txtcolor"
         android:textOff="No"
         android:textOn="Yes"
-        android:id="@+id/soundswitch"
-        android:layout_marginRight="10dp" />
+        android:textSize="25sp" />
+
     <TextView
-        android:textColor="@color/txtcolor"
-        android:textStyle="bold"
+        android:id="@+id/help"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/soundswitch"
-        android:text="About"
-        android:textSize="25sp"
-        android:id="@+id/about"/>
-    <TextView
-        android:textColor="@color/txtcolor"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/about"
+
         android:text="Help"
-        android:textSize="25sp"
-        android:id="@+id/help"/>
+        android:textColor="@color/txtcolor"
+        android:textSize="25sp" />
+
     <TextView
+        android:id="@+id/privacypolicy"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textColor="@color/txtcolor"
-        android:layout_below="@+id/help"
+
         android:text="Privacy Policy"
-        android:textSize="25sp"
-        android:id="@+id/privacypolicy"/>
-</RelativeLayout>
+        android:textColor="@color/txtcolor"
+        android:textSize="25sp" />
+</LinearLayout>

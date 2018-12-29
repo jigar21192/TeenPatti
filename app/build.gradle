@@ -14,8 +14,8 @@ android {
         applicationId "fungame.idea.sparks.fungame"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 3
-        versionName "2.1"
+        versionCode 5
+        versionName "5.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

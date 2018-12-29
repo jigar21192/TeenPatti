@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="fungame.idea.sparks.fungame.SplashScreen"
+            android:name=".SplashScreen"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,26 +22,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".Second_Page"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Setting_Activity"
+            android:screenOrientation="landscape" />
 
-        <activity android:name="fungame.idea.sparks.fungame.MainActivity" />
-        <activity
-            android:name="fungame.idea.sparks.fungame.Second_Page"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name="fungame.idea.sparks.fungame.Setting_Activity"
-            android:screenOrientation="landscape" />
-
-        <service android:name="fungame.idea.sparks.fungame.Sound" />
+        <service android:name=".Sound" />
 
         <activity
-            android:name="fungame.idea.sparks.fungame.Registration_Login.Login"
+            android:name=".Registration_Login.Login"
             android:screenOrientation="landscape" />
         <activity
-            android:name="fungame.idea.sparks.fungame.Game_Hajar"
+            android:name=".Game_Hajar"
             android:screenOrientation="landscape" />
         <activity
-            android:name="fungame.idea.sparks.fungame.Manno_Game"
+            android:name=".Manno_Game"
             android:screenOrientation="landscape" />
+        <activity android:name=".Janno_Game"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
