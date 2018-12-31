@@ -54,7 +54,7 @@ public class Bid_History_Adapter extends BaseAdapter {
             view=inflater.inflate(R.layout.list_item_bid_details,null);
         TextView card=view.findViewById(R.id.txt_bid_details_card);
         TextView coin=view.findViewById(R.id.txt_bid_details_coin);
-        Button delete =view.findViewById(R.id.delete_bid);
+       // Button delete =view.findViewById(R.id.delete_bid);
 
         Manno_DataModel dm=list.get(i);
 
@@ -62,7 +62,7 @@ public class Bid_History_Adapter extends BaseAdapter {
         card.setText(dm.getCard_number());
         coin.setText(dm.getCard_money());
         final String id=dm.getCard_id();
-        delete.setOnClickListener(new View.OnClickListener() {
+       /* delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 StringRequest stringRequest=new StringRequest(Request.Method.POST, DELETE_HISTORY, new Response.Listener<String>() {
@@ -104,7 +104,7 @@ public class Bid_History_Adapter extends BaseAdapter {
 
 
             }
-        });
+        });*/
 
 
 

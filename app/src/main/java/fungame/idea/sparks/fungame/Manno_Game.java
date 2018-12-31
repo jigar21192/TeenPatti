@@ -126,14 +126,6 @@ public class Manno_Game extends AppCompatActivity {
                         in_list=new ArrayList<>();
                         out_list=new ArrayList<>();
                         bid_history=new ArrayList<>();
-
-
-                        Log.e("Repeat  task",">>>>"+"hi");
-
-
-
-
-
                         list_view_details();
 
                        // load_out_page();
@@ -195,9 +187,6 @@ public class Manno_Game extends AppCompatActivity {
         m_bid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
 
                 final String card=m_select_card.getText().toString();
                 final String coin=m_select_coin.getText().toString();
@@ -269,14 +258,12 @@ public class Manno_Game extends AppCompatActivity {
         m_select_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //instantiate the popup.xml layout file
                 popup();
             }
         });
         m_select_coin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //instantiate the popup.xml layout file
                 popup_money();
             }
         });
@@ -520,6 +507,7 @@ public class Manno_Game extends AppCompatActivity {
                             if (i_o.trim().equals("in")) {
                                 counter_2.setText(counter);
 
+
                                 Glide.with(getApplicationContext()).load(card)
                                         .thumbnail(0.5f)
                                         .override(80,90)
@@ -538,7 +526,16 @@ public class Manno_Game extends AppCompatActivity {
                                         .into(m_image_out);
                             }
                             if (msg.equals("new_game")){
-                                Toast.makeText(Manno_Game.this, "New Game Start", Toast.LENGTH_LONG).show();
+                                LayoutInflater li = getLayoutInflater();
+                                //Getting the View object as defined in the customtoast.xml file
+                                View layout = li.inflate(R.layout.custome_toast,(ViewGroup) findViewById(R.id.custom_toast_layout));
+
+                                Toast toast = new Toast(getApplicationContext());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.TOP, 0, 0);
+                                toast.setView(layout);
+                                toast.show();
+
                             }
 
 
@@ -791,16 +788,31 @@ public class Manno_Game extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        m_repeatTask.cancel();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent=new Intent(Manno_Game.this,Second_Page.class);
         startActivity(intent);
+        finish();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        m_repeatTask.cancel();//  <<-------ENSURE onStop()
+        m_repeatTask.cancel();
+        //  <<-------ENSURE onStop()
 
     }
 
@@ -813,9 +825,5 @@ public class Manno_Game extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        m_repeatTask.cancel();
-    }
+
 }
