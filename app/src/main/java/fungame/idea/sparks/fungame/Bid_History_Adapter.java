@@ -26,7 +26,7 @@ public class Bid_History_Adapter extends BaseAdapter {
     Context context;
     List<Manno_DataModel> list;
     LayoutInflater inflater;
-    String DELETE_HISTORY="http://sabkuchhbechde.ga/teenpatti/delete_history.php";
+    String DELETE_HISTORY="http://jmfungame.com/delete_history.php";
 
     public Bid_History_Adapter(Context context, List<Manno_DataModel> list) {
         this.context=context;

@@ -42,8 +42,8 @@ public class Game_Hajar extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String KEY_Email = "email";
     public static final String ID= "id";
-    String IN_CARD_LOAD="http://sabkuchhbechde.ga/teenpatti/hazar_res.php";
-    String BID_URL="http://sabkuchhbechde.ga/teenpatti/bid_details.php";
+    String IN_CARD_LOAD="http://jmfungame.com/hazar_res.php";
+    String BID_URL="http://jmfungame.comteenpatti/bid_details.php";
     SharedPreferences sharedpreferences;
     LinearLayout in_page,out_page,linearLayout;
     PopupWindow popupWindow,popupWindow1;

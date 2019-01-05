@@ -52,13 +52,13 @@ public class Manno_Game extends AppCompatActivity {
     ProgressDialog pd;
 
     String c_id1;
-    String BID_DETAILS="http://sabkuchhbechde.ga/teenpatti/bid_history.php";
-    String USER_DETAILS="http://sabkuchhbechde.ga/teenpatti/user_details.php";
-    String LIST_RES="https://www.sabkuchhbechde.ga/teenpatti/mano_res.php";
-    String IN_CARD_LOAD="http://sabkuchhbechde.ga/teenpatti/hazar_res.php";
-    String BID_URL="http://sabkuchhbechde.ga/teenpatti/bid_details.php";
-    String Last_Card="https://www.sabkuchhbechde.ga/teenpatti/last_card.php";
-    String AUTO="https://www.sabkuchhbechde.ga/teenpatti/auto.php";
+    String BID_DETAILS="http://jmfungame.com/bid_history.php";
+    String USER_DETAILS="http://jmfungame.com/user_details.php";
+    String LIST_RES="http://jmfungame.com/mano_res.php";
+    String IN_CARD_LOAD="http://jmfungame.com/hazar_res.php";
+    String BID_URL="http://jmfungame.com/bid_details.php";
+    String Last_Card="http://jmfungame.com/last_card.php";
+    String AUTO="http://jmfungame.com/auto.php";
     SharedPreferences sharedpreferences;
     LinearLayout m_in_page,m_out_page,m_linearLayout;
     PopupWindow m_popupWindow,m_popupWindow1,m_popupWindow2;

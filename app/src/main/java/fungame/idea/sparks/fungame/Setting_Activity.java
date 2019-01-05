@@ -40,7 +40,7 @@ import fungame.idea.sparks.fungame.Registration_Login.Login;
 public class Setting_Activity extends AppCompatActivity {
     private SoundPlayer soundPlayer;
     public static final String MyPREFERENCES = "MyPrefs" ;
-    String CHANGE_PASS="http://sabkuchhbechde.ga/teenpatti/chagepass.php";
+    String CHANGE_PASS="http://jmfungame.com/chagepass.php";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     LinearLayout linearLayout;
