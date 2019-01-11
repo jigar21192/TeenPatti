@@ -59,13 +59,14 @@ public class Manno_Game extends AppCompatActivity {
     String BID_URL="http://jmfungame.com/bid_details.php";
     String Last_Card="http://jmfungame.com/last_card.php";
     String AUTO="http://jmfungame.com/auto.php";
+    String TYPE="";
     SharedPreferences sharedpreferences;
     LinearLayout m_in_page,m_out_page,m_linearLayout;
     PopupWindow m_popupWindow,m_popupWindow1,m_popupWindow2;
     RelativeLayout m_relativeLayout;
     Button m_select_card,m_select_coin,m_bid,history_bid;
     TextView m_username,m_balance,counter_1,counter_2;
-    String name,balance, id,card_id,card_number,card_coin;
+    String name,balance, id,card_id,card_number,card_coin,type;
 
     List<String>in_list;
     List<String>out_list;
@@ -127,6 +128,7 @@ public class Manno_Game extends AppCompatActivity {
                         out_list=new ArrayList<>();
                         bid_history=new ArrayList<>();
                         list_view_details();
+                        load_type();
 
                        // load_out_page();
 
@@ -268,6 +270,55 @@ public class Manno_Game extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void load_type() {
+        StringRequest request1=new StringRequest(Request.Method.GET, TYPE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        String tt = object.getString("type");
+                        type = object.getString("text");
+
+                        if (type.equals("stop")){
+                            LayoutInflater li = getLayoutInflater();
+                            //Getting the View object as defined in the customtoast.xml file
+                            View layout = li.inflate(R.layout.custome_toast,(ViewGroup) findViewById(R.id.custom_toast_layout));
+                            TextView txt=layout.findViewById(R.id.custom_toast_message);
+                            txt.setText("Game Stop");
+                            Toast toast = new Toast(getApplicationContext());
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP, 0, 0);
+                            toast.setView(layout);
+                            toast.show();
+
+                        }
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
+
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Manno_Game.this,"Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        RequestQueue queue=Volley.newRequestQueue(Manno_Game.this);
+        queue.add(request1);
     }
 
     private void load_auto() {
@@ -529,7 +580,8 @@ public class Manno_Game extends AppCompatActivity {
                                 LayoutInflater li = getLayoutInflater();
                                 //Getting the View object as defined in the customtoast.xml file
                                 View layout = li.inflate(R.layout.custome_toast,(ViewGroup) findViewById(R.id.custom_toast_layout));
-
+                                TextView txt=layout.findViewById(R.id.custom_toast_message);
+                                txt.setText("New Game Start");
                                 Toast toast = new Toast(getApplicationContext());
                                 toast.setDuration(Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.TOP, 0, 0);

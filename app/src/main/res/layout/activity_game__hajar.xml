@@ -7,6 +7,15 @@
     android:background="@drawable/bg4"
     android:layout_height="match_parent"
     tools:context="fungame.idea.sparks.fungame.Game_Hajar">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:id="@+id/card_total"
+        android:textSize="25sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp"
+        android:textColor="#ffffff"/>
 <LinearLayout
     android:id="@+id/l1"
     android:layout_width="wrap_content"
@@ -30,41 +39,36 @@
 
     <LinearLayout
         android:id="@+id/l5"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="30dp"
-        android:orientation="vertical">
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
 
         <ImageView
-            android:id="@+id/image_main_in"
+            android:layout_margin="10dp"
+            android:id="@+id/image_hajar_1"
             android:layout_width="80dp"
             android:layout_height="100dp"
-            android:layout_alignTop="@+id/l5"
             android:src="@drawable/blank_card" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/l6"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="147dp"
-        android:layout_marginRight="147dp"
-        android:orientation="vertical">
-
         <ImageView
-            android:id="@+id/image_main_out"
+            android:layout_margin="10dp"
+            android:id="@+id/image_hajar_2"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:src="@drawable/blank_card" />
+        <ImageView
+            android:layout_margin="10dp"
+            android:id="@+id/image_hajar_3"
             android:layout_width="80dp"
             android:layout_height="100dp"
             android:src="@drawable/blank_card" />
 
     </LinearLayout>
 
-    <LinearLayout
+
+   <!-- <LinearLayout
         android:id="@+id/l3"
         android:layout_width="80dp"
         android:layout_height="120dp"
@@ -95,9 +99,9 @@
             android:src="@drawable/blank_card"
             android:layout_alignLeft="@+id/l3" />
 
-    </LinearLayout>
+    </LinearLayout>-->
 
-    <LinearLayout
+   <!-- <LinearLayout
         android:id="@+id/l4"
         android:layout_width="80dp"
         android:layout_height="120dp"
@@ -129,7 +133,7 @@
 
 
     </LinearLayout>
-
+-->
 
     <LinearLayout
         android:id="@+id/l2"
@@ -160,64 +164,72 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="70dp"
-        android:layout_height="40dp"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="20dp"
         android:layout_toEndOf="@+id/l1"
         android:orientation="vertical"
         android:layout_marginLeft="3dp"
         android:layout_toRightOf="@+id/l1">
 
         <TextView
-            android:id="@+id/user"
+            android:id="@+id/h_username"
             android:layout_width="65dp"
             android:layout_height="19dp"
             android:text="Name"
+            android:fontFamily="@font/fontrec"
             android:textColor="@color/txtcolor"
             android:textSize="17sp" />
 
         <TextView
-            android:layout_width="65dp"
+            android:layout_width="78dp"
             android:layout_height="19dp"
             android:text="Balance"
+            android:id="@+id/h_balance"
+            android:fontFamily="@font/fontrec"
             android:textColor="@color/txtcolor"
             android:textSize="17sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:gravity="center"
+        android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal"
+        >
 
-        <ToggleButton
-            android:id="@+id/in_out"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:textOff="OUT"
-            android:textOn="IN"
-             />
+
         <Button
+            android:textColor="@color/btntxtcolor"
+            android:layout_marginRight="5dp"
             android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
+            android:background="@drawable/roundshape"
             android:text="CARD"
             android:id="@+id/select_card"/>
 
         <Button
             android:id="@+id/select_coin"
+            android:textColor="@color/btntxtcolor"
+            android:layout_margin="10dp"
             android:layout_width="70dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
+            android:background="@drawable/roundshape"
             android:text="COIN" />
 
         <Button
             android:id="@+id/bid"
+            android:textColor="@color/btntxtcolor"
+            android:layout_margin="10dp"
+            android:background="@drawable/roundshape"
             android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:text="BID" />
+            android:layout_height="30dp"
+            android:text="BID"/>
     </LinearLayout>
 </RelativeLayout>
