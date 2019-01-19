@@ -1,8 +1,11 @@
 package fungame.idea.sparks.fungame;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,7 +38,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -43,18 +49,29 @@ public class Game_Hajar extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String KEY_Email = "email";
     public static final String ID= "id";
-    String IN_CARD_LOAD="http://jmfungame.com/hazar_res.php";
-    String BID_URL="http://jmfungame.com/bid_details.php";
-    String USER_DETAILS="http://jmfungame.com/user_details.php";
+    String CARD_Total="http://sabkuchhbechde.ga/teenpatti/hazar_total";
+    String HISTORY_BID="http://sabkuchhbechde.ga/teenpatti/hazar_history";
+    String CARD_LOAD="http://sabkuchhbechde.ga/teenpatti/hazar_res2.php";
+    String BID_URL="http://sabkuchhbechde.ga/teenpatti/hazar_bid.php";
+    String LIST_LOAD="http://sabkuchhbechde.ga/teenpatti/hazar_res1.php";
+    String USER_DETAILS="http://sabkuchhbechde.ga/teenpatti/user_details.php";
     SharedPreferences sharedpreferences;
+    List<Hajar_Data_Model> list;
+    List<Hajar_Data_Model> list1;
+    List<Hajar_Data_Model> list2;
+    List<Manno_DataModel>bid_history;
     LinearLayout in_page,out_page,linearLayout;
-    PopupWindow popupWindow,popupWindow1;
+    PopupWindow popupWindow,popupWindow1,h_popupWindow2;
     RelativeLayout relativeLayout;
-    Button select_card,select_coin,bid;
+    Button select_card,select_coin,bid,history_bid;
     TextView h_username,h_balance,card_total;
     ImageView image_hajar_1,image_hajar_2,image_hajar_3;
-    String name,balance, id;
+    String name,balance, id,card_id,card_number,card_coin;
+    ListView lv_hajar1,lv_hajar2,lv_hajar3;
     Timer repeatTask;
+    ProgressDialog pd;
+    String digit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,12 +88,18 @@ public class Game_Hajar extends AppCompatActivity {
         select_card=findViewById(R.id.select_card);
         select_coin=findViewById(R.id.select_coin);
         h_username=findViewById(R.id.h_username);
+        history_bid=findViewById(R.id.history_bid);
         h_balance=findViewById(R.id.h_balance);
         bid=findViewById(R.id.bid);
+        lv_hajar1=findViewById(R.id.lv_hajar1);
+        lv_hajar2=findViewById(R.id.lv_hajar2);
+        lv_hajar3=findViewById(R.id.lv_hajar3);
         image_hajar_1=findViewById(R.id.image_hajar_1);
         image_hajar_2=findViewById(R.id.image_hajar_2);
         image_hajar_3=findViewById(R.id.image_hajar_3);
 
+
+        pd=new ProgressDialog(Game_Hajar.this);
 
 
 
@@ -88,7 +111,17 @@ public class Game_Hajar extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                    //        load_in_page();
+                            load_card();
+
+                           // load_list();
+                        card_total();
+                        bid_history=new ArrayList<>();
+                        list=new ArrayList<>();
+                        list1=new ArrayList<>();
+                        list2=new ArrayList<>();
+
+
+
 
                   //      load_out_page();
 
@@ -103,7 +136,6 @@ public class Game_Hajar extends AppCompatActivity {
                                         JSONObject object = array.getJSONObject(i);
                                         name = object.getString("name");
                                         balance = object.getString("coin");
-                                        Log.e(">>>>>",">>>>>"+name);
 
                                     }
                                 } catch (JSONException e) {
@@ -140,11 +172,9 @@ public class Game_Hajar extends AppCompatActivity {
                         requestQueue.add(stringRequest);
 
 
-
-
-                        bid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        bid.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                                public void onClick(View view) {
 
                 final String card=select_card.getText().toString();
                 final String coin=select_coin.getText().toString();
@@ -152,21 +182,39 @@ public class Game_Hajar extends AppCompatActivity {
 
                 if (card.equals("CARD")){
                     Toast.makeText(Game_Hajar.this, "Select any Card", Toast.LENGTH_SHORT).show();
-                }else if (coin.equals("MONEY")){
+                }else if (coin.equals("COIN")){
                     Toast.makeText(Game_Hajar.this, "Select Money", Toast.LENGTH_SHORT).show();
                     }else {
-
+                    pd.setMessage("loading");
+                    pd.show();
                 StringRequest request=new StringRequest(Request.Method.POST, BID_URL, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(Game_Hajar.this, response, Toast.LENGTH_SHORT).show();
+                        if (response.trim().equals("success")) {
+                            pd.dismiss();
+                            Toast.makeText(Game_Hajar.this, "BID Success", Toast.LENGTH_SHORT).show();
+                        }else if (response.trim().equals("Increase_Money")){
+                            pd.dismiss();
+                            Toast.makeText(Game_Hajar.this, "Increase Your Coin", Toast.LENGTH_SHORT).show();
 
+                        }else if(response.trim().equals("Wait For Game Start")){
+
+                            pd.dismiss();
+                            Toast.makeText(Game_Hajar.this, "Game Not Started", Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            pd.dismiss();
+                            Toast.makeText(Game_Hajar.this, "Problem On BID", Toast.LENGTH_SHORT).show();
+
+
+                        }
 
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Game_Hajar.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                        Toast.makeText(Game_Hajar.this, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 })
                 {
@@ -186,7 +234,12 @@ public class Game_Hajar extends AppCompatActivity {
 
             }}
         });
-
+        history_bid.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                popup_history();
+                            }
+                        });
         select_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -206,6 +259,193 @@ public class Game_Hajar extends AppCompatActivity {
                 });
             }
         }, 0, 5000);
+
+    }
+
+    private void card_total() {
+        StringRequest request=new StringRequest(Request.Method.GET, CARD_Total, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array=new JSONArray(response);
+                    for (int i=0;i<array.length();i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        digit=object.getString("digit");
+
+                        card_total.setText(digit);
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(Game_Hajar.this, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        })
+       ;
+
+        RequestQueue queue=Volley.newRequestQueue(Game_Hajar.this);
+        queue.add(request);
+
+
+    }
+
+
+
+    private void popup_history() {
+            LayoutInflater layoutInflater = (LayoutInflater) Game_Hajar.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View customView = layoutInflater.inflate(R.layout.history_bid_details,null);
+
+            final ListView lv=(ListView)customView.findViewById(R.id.lv_history);
+            final Button close=(Button)customView.findViewById(R.id.list_close_btn);
+
+            close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    h_popupWindow2.dismiss();
+                    bid_history.clear();
+                }
+            });
+            StringRequest stringRequest3=new StringRequest(Request.Method.POST, HISTORY_BID, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONArray array=new JSONArray(response);
+                        for (int i=0;i<array.length();i++) {
+                            JSONObject object = array.getJSONObject(i);
+                            card_id=object.getString("id");
+                            card_number=object.getString("card_number");
+                            card_coin=object.getString("money");
+
+                            Manno_DataModel dm=new Manno_DataModel();
+                            dm.setCard_id(card_id);
+                            dm.setCard_number(card_number);
+                            dm.setCard_coin(card_coin);
+
+                            bid_history.add(dm);
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Bid_History_Adapter adapter=new Bid_History_Adapter(Game_Hajar.this,bid_history);
+                    lv.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+
+
+                }
+
+
+
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(Game_Hajar.this,"Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+
+
+                }
+            })
+            {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String,String>param=new HashMap<>();
+                    param.put("id",id);
+
+
+                    return param;
+                }
+            };
+            RequestQueue requestQueue=Volley.newRequestQueue(Game_Hajar.this);
+            requestQueue.add(stringRequest3);
+
+
+
+
+
+            //instantiate popup window
+            h_popupWindow2 = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            //display the popup window
+            h_popupWindow2.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
+
+
+        }
+
+        private void load_list() {
+        StringRequest request4=new StringRequest(Request.Method.GET, LIST_LOAD, new Response.Listener<String>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    for (int i=0;i<array.length();i++) {
+                            JSONObject object=array.getJSONObject(i);
+
+                            String cc=object.getString("cc");
+                          //  String category=object.getString("category");
+                            Hajar_Data_Model model=new Hajar_Data_Model();
+                            if (cc.equals("1")){
+
+                                String category=object.getString("category");
+                                Log.e("Res",">>>>>>>"+cc+category);
+                                model.setCc(cc);
+                                model.setCategory(category);
+
+                                list.add(model);
+                                Hajar_Adapter adapter=new Hajar_Adapter(Game_Hajar.this,list);
+                                lv_hajar1.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+
+                            }
+                        if (cc.equals("2")){
+
+                            String category=object.getString("category");
+                            model.setCc(cc);
+                            model.setCategory(category);
+
+                            list1.add(model);
+                            Hajar_Adapter adapter=new Hajar_Adapter(Game_Hajar.this,list1);
+                            lv_hajar2.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+
+                        }
+                        if (cc.equals("3")){
+
+                            String category=object.getString("category");
+                            model.setCc(cc);
+                            model.setCategory(category);
+
+                            list2.add(model);
+                            Hajar_Adapter adapter=new Hajar_Adapter(Game_Hajar.this,list2);
+                            lv_hajar3.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+
+                        }
+
+                        }
+
+
+
+                        }
+                        catch (JSONException e) {
+                                e.printStackTrace();
+                             }
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Game_Hajar.this, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue queue=Volley.newRequestQueue(Game_Hajar.this);
+        queue.add(request4);
 
     }
 
@@ -254,35 +494,56 @@ public class Game_Hajar extends AppCompatActivity {
 
     }*/
 
-   /* private void load_in_page() {
+    private void load_card() {
 
-        StringRequest request=new StringRequest(Request.Method.GET, IN_CARD_LOAD, new Response.Listener<String>() {
+        StringRequest request=new StringRequest(Request.Method.GET, CARD_LOAD, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                image_hajar_1.setImageResource(R.drawable.blank_card);
+                image_hajar_2.setImageResource(R.drawable.blank_card);
+                image_hajar_3.setImageResource(R.drawable.blank_card);
 
                 try {
                     JSONArray array=new JSONArray(response);
                         for (int i=0;i<array.length();i++) {
                             JSONObject object = array.getJSONObject(i);
-                            String i_o=object.getString("i_o");
-                            String card=object.getString("category");
+                          //  Log.e("Hajar_Res",">>>>>>>"+object);
+                          //  String i_o = object.getString("i_o");
+                            String cc = object.getString("count");
+                            String cards = object.getString("category");
 
-                            if (i_o.trim().equals("in")){
+                            if (cc.trim().equals("1")) {
 
-                            Glide.with(getApplicationContext()).load(card)
-                                    .thumbnail(0.5f)
-                                    .crossFade()
-                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                    .into(image_in);}
-                                    else {
-                                Glide.with(getApplicationContext()).load(card)
+                                Glide.with(getApplicationContext()).load(cards)
                                         .thumbnail(0.5f)
                                         .crossFade()
                                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .into(image_out);}
+                                        .into(image_hajar_1);
+                                }
+
+                                if (cc.trim().equals("2")) {
+                                    Glide.with(getApplicationContext()).load(cards)
+                                            .thumbnail(0.5f)
+                                            .crossFade()
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .into(image_hajar_2);
+
+
+                                }
+
+
+                           if (cc.trim().equals("3")) {
+                                Glide.with(getApplicationContext()).load(cards)
+                                        .thumbnail(0.5f)
+                                        .crossFade()
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .into(image_hajar_3);
+                            }
 
 
                         }
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -292,9 +553,9 @@ public class Game_Hajar extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Game_Hajar.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Game_Hajar.this, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
             }
-        })*/
+        })
        /* {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -304,11 +565,11 @@ public class Game_Hajar extends AppCompatActivity {
             }
         }*/;
 
-  /*      RequestQueue queue=Volley.newRequestQueue(Game_Hajar.this);
+        RequestQueue queue=Volley.newRequestQueue(Game_Hajar.this);
         queue.add(request);
 
 
-    }*/
+    }
 
     private void popup_money() {
         LayoutInflater layoutInflater = (LayoutInflater) Game_Hajar.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -321,7 +582,13 @@ public class Game_Hajar extends AppCompatActivity {
         final Button one_thousand=customView.findViewById(R.id.no1000);
         final Button two_thousand=customView.findViewById(R.id.no2000);
         final Button five_thousand=customView.findViewById(R.id.no5000);
+        final Button ten_thousand=customView.findViewById(R.id.no10000);
+
         final Button close_amount=customView.findViewById(R.id.close_amount);
+
+        two_thousand.setVisibility(View.GONE);
+        five_thousand.setVisibility(View.GONE);
+        ten_thousand.setVisibility(View.GONE);
 
 
 
@@ -503,6 +770,11 @@ public class Game_Hajar extends AppCompatActivity {
         //close the popup wind
 
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        repeatTask.cancel();
+    }
 
     @Override
     public void onBackPressed() {
@@ -512,20 +784,18 @@ public class Game_Hajar extends AppCompatActivity {
     }
     @Override
     protected void onStop() {
-        super.onStop();//  <<-------ENSURE onStop()
-
+        super.onStop();
+        repeatTask.cancel();
+        //  <<-------ENSURE onStop()
 
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
+        Intent intent=new Intent(Game_Hajar.this,Game_Hajar.class);
+        startActivity(intent);
+        finish();
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        repeatTask.cancel();
     }
 }

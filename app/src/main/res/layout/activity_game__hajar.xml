@@ -19,21 +19,20 @@
 <LinearLayout
     android:id="@+id/l1"
     android:layout_width="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_height="wrap_content">
-    <TextView
-        android:textColor="@color/txtcolor"
-        android:id="@+id/txt1"
-        android:layout_width="100dp"
-        android:layout_height="28dp"
-        android:text="IN"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="25sp"
-        />
+
     <ListView
-        android:id="@+id/lv_in"
-        android:layout_width="100dp"
+        android:id="@+id/lv_hajar1"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"/>
+    <ListView
+        android:id="@+id/lv_hajar2"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"/>
+    <ListView
+        android:id="@+id/lv_hajar3"
+        android:layout_width="50dp"
         android:layout_height="match_parent"/>
 </LinearLayout>
 
@@ -135,7 +134,7 @@
     </LinearLayout>
 -->
 
-    <LinearLayout
+   <!-- <LinearLayout
         android:id="@+id/l2"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -161,16 +160,17 @@
             android:layout_height="match_parent" />
 
 
-    </LinearLayout>
+    </LinearLayout>-->
 
     <LinearLayout
+        android:id="@+id/ll2"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:layout_toEndOf="@+id/l1"
         android:orientation="vertical"
-        android:layout_marginLeft="3dp"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/l1">
 
         <TextView
@@ -196,40 +196,51 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:gravity="center"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/l5"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="150dp"
+        android:layout_marginRight="150dp"
         android:background="@android:color/transparent"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal"
-        >
+        android:gravity="center"
+        android:orientation="horizontal">
 
 
         <Button
-            android:textColor="@color/btntxtcolor"
-            android:layout_marginRight="5dp"
+            android:id="@+id/select_card"
             android:layout_width="50dp"
             android:layout_height="30dp"
+            android:layout_marginRight="5dp"
             android:background="@drawable/roundshape"
             android:text="CARD"
-            android:id="@+id/select_card"/>
+            android:textColor="@color/btntxtcolor" />
 
         <Button
             android:id="@+id/select_coin"
-            android:textColor="@color/btntxtcolor"
-            android:layout_margin="10dp"
             android:layout_width="70dp"
             android:layout_height="30dp"
+
+            android:layout_margin="10dp"
             android:background="@drawable/roundshape"
-            android:text="COIN" />
+            android:text="COIN"
+            android:textColor="@color/btntxtcolor" />
 
         <Button
             android:id="@+id/bid"
-            android:textColor="@color/btntxtcolor"
-            android:layout_margin="10dp"
-            android:background="@drawable/roundshape"
             android:layout_width="50dp"
             android:layout_height="30dp"
-            android:text="BID"/>
+            android:layout_margin="10dp"
+            android:background="@drawable/roundshape"
+            android:text="BID"
+            android:textColor="@color/btntxtcolor" />
+        <Button
+
+            android:textColor="@color/btntxtcolor"
+            android:background="@drawable/roundshape"
+            android:id="@+id/history_bid"
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:text="History" />
     </LinearLayout>
 </RelativeLayout>

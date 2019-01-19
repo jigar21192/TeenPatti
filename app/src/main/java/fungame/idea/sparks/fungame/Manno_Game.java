@@ -121,7 +121,7 @@ public class Manno_Game extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                       // load_auto();
+                        // load_auto();
                         load_last_card();
                         load_in_page();
                         in_list=new ArrayList<>();
@@ -130,7 +130,7 @@ public class Manno_Game extends AppCompatActivity {
                         list_view_details();
                         load_type();
 
-                       // load_out_page();
+                        // load_out_page();
 
                         StringRequest stringRequest=new StringRequest(Request.Method.POST, USER_DETAILS, new Response.Listener<String>() {
                             @Override
@@ -148,8 +148,8 @@ public class Manno_Game extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
 
-                                    m_balance.setText(balance);
-                                    m_username.setText(name);
+                                m_balance.setText(balance);
+                                m_username.setText(name);
 
 
                             }
@@ -195,7 +195,7 @@ public class Manno_Game extends AppCompatActivity {
 
                 if (card.equals("CARD")){
                     Toast.makeText(Manno_Game.this, "Select any Card", Toast.LENGTH_SHORT).show();
-                }else if (coin.equals("MONEY")){
+                }else if (coin.equals("COIN")){
                     Toast.makeText(Manno_Game.this, "Select Money", Toast.LENGTH_SHORT).show();
                 }else {
                     pd.setMessage("loading");
@@ -327,7 +327,7 @@ public class Manno_Game extends AppCompatActivity {
             public void onResponse(String response) {
 
 
-                }
+            }
 
 
 
@@ -386,7 +386,6 @@ public class Manno_Game extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String>param=new HashMap<>();
-
                 return param;
             }
         }*/;
@@ -498,7 +497,7 @@ public class Manno_Game extends AppCompatActivity {
 
                             String card=object.getString("category");
                             in_list.add(card);
-                            }
+                        }
 
                         else if (i_o.trim().equals("out")){
 
@@ -507,7 +506,7 @@ public class Manno_Game extends AppCompatActivity {
 
                             Manno_Adapter adapter=new Manno_Adapter(Manno_Game.this,out_list);
                             m_lv_out.setAdapter(adapter);
-                           }
+                        }
 
                         Manno_Adapter adapter=new Manno_Adapter(Manno_Game.this,in_list);
                         m_lv_in.setAdapter(adapter);
@@ -555,43 +554,43 @@ public class Manno_Game extends AppCompatActivity {
 
 
 
-                            if (i_o.trim().equals("in")) {
-                                counter_2.setText(counter);
+                        if (i_o.trim().equals("in")) {
+                            counter_2.setText(counter);
 
 
-                                Glide.with(getApplicationContext()).load(card)
-                                        .thumbnail(0.5f)
-                                        .override(80,90)
-                                        .crossFade()
-                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .into(m_image_in);
-                            } else {
+                            Glide.with(getApplicationContext()).load(card)
+                                    .thumbnail(0.5f)
+                                    .override(80,90)
+                                    .crossFade()
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .into(m_image_in);
+                        } else {
 
-                                counter_1.setText(counter);
+                            counter_1.setText(counter);
 
-                                Glide.with(getApplicationContext()).load(card)
-                                        .thumbnail(0.5f)
-                                        .override(80,90)
-                                        .crossFade()
-                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .into(m_image_out);
-                            }
-                            if (msg.equals("new_game")){
-                                LayoutInflater li = getLayoutInflater();
-                                //Getting the View object as defined in the customtoast.xml file
-                                View layout = li.inflate(R.layout.custome_toast,(ViewGroup) findViewById(R.id.custom_toast_layout));
-                                TextView txt=layout.findViewById(R.id.custom_toast_message);
-                                txt.setText("New Game Start");
-                                Toast toast = new Toast(getApplicationContext());
-                                toast.setDuration(Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.TOP, 0, 0);
-                                toast.setView(layout);
-                                toast.show();
-
-                            }
-
+                            Glide.with(getApplicationContext()).load(card)
+                                    .thumbnail(0.5f)
+                                    .override(80,90)
+                                    .crossFade()
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .into(m_image_out);
+                        }
+                        if (msg.equals("new_game")){
+                            LayoutInflater li = getLayoutInflater();
+                            //Getting the View object as defined in the customtoast.xml file
+                            View layout = li.inflate(R.layout.custome_toast,(ViewGroup) findViewById(R.id.custom_toast_layout));
+                            TextView txt=layout.findViewById(R.id.custom_toast_message);
+                            txt.setText("New Game Start");
+                            Toast toast = new Toast(getApplicationContext());
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP, 0, 0);
+                            toast.setView(layout);
+                            toast.show();
 
                         }
+
+
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -609,7 +608,6 @@ public class Manno_Game extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String>param=new HashMap<>();
-
                 return param;
             }
         }*/;
