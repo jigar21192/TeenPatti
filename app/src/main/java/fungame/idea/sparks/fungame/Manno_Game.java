@@ -140,7 +140,7 @@ public class Manno_Game extends AppCompatActivity {
                                     for (int i = 0; i < array.length(); i++) {
                                         JSONObject object = array.getJSONObject(i);
                                         name = object.getString("name");
-                                        balance = object.getString("coin");
+                                        balance = object.getString("manno_coin");
                                         Log.e(">>>>>",">>>>>"+name);
 
                                     }

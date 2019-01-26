@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -99,6 +100,8 @@ public class Game_Hajar extends AppCompatActivity {
         image_hajar_3=findViewById(R.id.image_hajar_3);
 
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         pd=new ProgressDialog(Game_Hajar.this);
 
 
@@ -135,7 +138,7 @@ public class Game_Hajar extends AppCompatActivity {
                                     for (int i = 0; i < array.length(); i++) {
                                         JSONObject object = array.getJSONObject(i);
                                         name = object.getString("name");
-                                        balance = object.getString("coin");
+                                        balance = object.getString("hazar_coin");
 
                                     }
                                 } catch (JSONException e) {
@@ -538,6 +541,17 @@ public class Game_Hajar extends AppCompatActivity {
                                         .crossFade()
                                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                                         .into(image_hajar_3);
+
+                               LayoutInflater li = getLayoutInflater();
+                               //Getting the View object as defined in the customtoast.xml file
+                               View layout = li.inflate(R.layout.custome_toast,(ViewGroup) findViewById(R.id.custom_toast_layout));
+                               TextView txt=layout.findViewById(R.id.custom_toast_message);
+                               txt.setText("New Game Start");
+                               Toast toast = new Toast(getApplicationContext());
+                               toast.setDuration(Toast.LENGTH_SHORT);
+                               toast.setGravity(Gravity.TOP, 0, 0);
+                               toast.setView(layout);
+                               toast.show();
                             }
 
 
