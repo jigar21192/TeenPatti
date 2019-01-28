@@ -70,6 +70,7 @@ public class Game_Hajar extends AppCompatActivity {
     String name,balance, id,card_id,card_number,card_coin;
     ListView lv_hajar1,lv_hajar2,lv_hajar3;
     Timer repeatTask;
+    Hajar_Data_Model model;
     ProgressDialog pd;
     String digit;
 
@@ -93,8 +94,8 @@ public class Game_Hajar extends AppCompatActivity {
         h_balance=findViewById(R.id.h_balance);
         bid=findViewById(R.id.bid);
         lv_hajar1=findViewById(R.id.lv_hajar1);
-        lv_hajar2=findViewById(R.id.lv_hajar2);
-        lv_hajar3=findViewById(R.id.lv_hajar3);
+        /*lv_hajar2=findViewById(R.id.lv_hajar2);
+        lv_hajar3=findViewById(R.id.lv_hajar3);*/
         image_hajar_1=findViewById(R.id.image_hajar_1);
         image_hajar_2=findViewById(R.id.image_hajar_2);
         image_hajar_3=findViewById(R.id.image_hajar_3);
@@ -116,12 +117,12 @@ public class Game_Hajar extends AppCompatActivity {
                     public void run() {
                             load_card();
 
-                           // load_list();
+                            load_list();
                         card_total();
                         bid_history=new ArrayList<>();
                         list=new ArrayList<>();
-                        list1=new ArrayList<>();
-                        list2=new ArrayList<>();
+                   /*     list1=new ArrayList<>();
+                        list2=new ArrayList<>();*/
 
 
 
@@ -384,53 +385,81 @@ public class Game_Hajar extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(String response) {
+
                 try {
                     JSONArray array = new JSONArray(response);
                     for (int i=0;i<array.length();i++) {
-                            JSONObject object=array.getJSONObject(i);
+                        model = new Hajar_Data_Model();
+                        JSONArray array1 = array.getJSONArray(i);
+                        for (int j = 0; j < array1.length(); j++) {
+                            JSONObject object=array1.getJSONObject(j);
 
-                            String cc=object.getString("cc");
-                          //  String category=object.getString("category");
-                            Hajar_Data_Model model=new Hajar_Data_Model();
-                            if (cc.equals("1")){
+                            String cc = object.getString("cc");
 
-                                String category=object.getString("category");
-                                Log.e("Res",">>>>>>>"+cc+category);
+                            Log.e("Res", ">>>>>>>" + cc );
+                            //  String category=object.getString("category");
+
+                            if (cc.equals("1")) {
+                                String category = object.getString("category");
+                                model.setCategory(category);
+                            }if (cc.equals("2")) {
+                                String category1 = object.getString("category");
+                                model.setCategory1(category1);
+                            }
+                            if (cc.equals("3")) {
+                                String category2 = object.getString("category");
+                                model.setCategory2(category2);
+                            }
+
+
+
+
+
+
+                           /* if (cc.equals("1")) {
+
+                                String category = object.getString("category");
+                                Log.e("Res", ">>>>>>>" + cc + category);
                                 model.setCc(cc);
                                 model.setCategory(category);
 
                                 list.add(model);
-                                Hajar_Adapter adapter=new Hajar_Adapter(Game_Hajar.this,list);
+                                Hajar_Adapter adapter = new Hajar_Adapter(Game_Hajar.this, list);
                                 lv_hajar1.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
 
                             }
-                        if (cc.equals("2")){
+                            if (cc.equals("2")) {
 
-                            String category=object.getString("category");
-                            model.setCc(cc);
-                            model.setCategory(category);
+                                String category = object.getString("category");
+                                model.setCc(cc);
+                                model.setCategory(category);
 
-                            list1.add(model);
-                            Hajar_Adapter adapter=new Hajar_Adapter(Game_Hajar.this,list1);
-                            lv_hajar2.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
+                                list1.add(model);
+                                Hajar_Adapter adapter = new Hajar_Adapter(Game_Hajar.this, list1);
+                                lv_hajar2.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
 
+                            }
+                            if (cc.equals("3")) {
+
+                                String category = object.getString("category");
+                                model.setCc(cc);
+                                model.setCategory(category);
+
+                                list2.add(model);
+                                Hajar_Adapter adapter = new Hajar_Adapter(Game_Hajar.this, list2);
+                                lv_hajar3.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+
+                            }
+*/
                         }
-                        if (cc.equals("3")){
-
-                            String category=object.getString("category");
-                            model.setCc(cc);
-                            model.setCategory(category);
-
-                            list2.add(model);
-                            Hajar_Adapter adapter=new Hajar_Adapter(Game_Hajar.this,list2);
-                            lv_hajar3.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-
-                        }
-
-                        }
+                        list.add(model);
+                        Hajar_Adapter adapter = new Hajar_Adapter(Game_Hajar.this, list);
+                        lv_hajar1.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
 
 
 

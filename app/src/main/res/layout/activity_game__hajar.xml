@@ -24,44 +24,41 @@
 
     <ListView
         android:id="@+id/lv_hajar1"
-        android:layout_width="50dp"
+        android:layout_width="150dp"
         android:layout_height="match_parent"/>
-    <ListView
-        android:id="@+id/lv_hajar2"
-        android:layout_width="50dp"
-        android:layout_height="match_parent"/>
-    <ListView
-        android:id="@+id/lv_hajar3"
-        android:layout_width="50dp"
-        android:layout_height="match_parent"/>
+
 </LinearLayout>
 
     <LinearLayout
         android:id="@+id/l5"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="76dp"
+        android:layout_marginRight="76dp"
+        android:orientation="horizontal">
 
         <ImageView
-            android:layout_margin="10dp"
             android:id="@+id/image_hajar_1"
             android:layout_width="80dp"
             android:layout_height="100dp"
-            android:src="@drawable/blank_card" />
-        <ImageView
             android:layout_margin="10dp"
+            android:src="@drawable/blank_card" />
+
+        <ImageView
             android:id="@+id/image_hajar_2"
             android:layout_width="80dp"
             android:layout_height="100dp"
-            android:src="@drawable/blank_card" />
-        <ImageView
             android:layout_margin="10dp"
+            android:src="@drawable/blank_card" />
+
+        <ImageView
             android:id="@+id/image_hajar_3"
             android:layout_width="80dp"
             android:layout_height="100dp"
+            android:layout_margin="10dp"
             android:src="@drawable/blank_card" />
 
     </LinearLayout>
@@ -164,8 +161,8 @@
 
     <LinearLayout
         android:id="@+id/ll2"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
         android:layout_toEndOf="@+id/l1"
@@ -178,7 +175,7 @@
             android:layout_width="65dp"
             android:layout_height="19dp"
             android:fontFamily="@font/fontrec"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:text="Name"
             android:textColor="@color/txtcolor"
             android:textSize="17sp" />
@@ -190,6 +187,7 @@
             android:layout_marginTop="5dp"
             android:fontFamily="@font/fontrec"
             android:text="Balance"
+            android:gravity="center"
             android:textColor="@color/txtcolor"
             android:textSize="17sp" />
 
@@ -197,13 +195,13 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/l5"
-        android:layout_marginTop="40dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="150dp"
-        android:layout_marginRight="150dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginRight="88dp"
         android:background="@android:color/transparent"
         android:gravity="center"
         android:orientation="horizontal">
@@ -236,13 +234,14 @@
             android:background="@drawable/roundshape"
             android:text="BID"
             android:textColor="@color/btntxtcolor" />
+
         <Button
 
-            android:textColor="@color/btntxtcolor"
-            android:background="@drawable/roundshape"
             android:id="@+id/history_bid"
             android:layout_width="65dp"
             android:layout_height="30dp"
-            android:text="History" />
+            android:background="@drawable/roundshape"
+            android:text="History"
+            android:textColor="@color/btntxtcolor" />
     </LinearLayout>
 </RelativeLayout>

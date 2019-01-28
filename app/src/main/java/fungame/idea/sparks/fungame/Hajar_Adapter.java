@@ -44,15 +44,31 @@ public class Hajar_Adapter extends BaseAdapter {
         view=inflater.inflate(R.layout.list_hajar,null);
         ImageView image1=view.findViewById(R.id.image1);
 
-
+        ImageView image2=view.findViewById(R.id.image2);
+        ImageView image3=view.findViewById(R.id.image3);
 
         Hajar_Data_Model model= (Hajar_Data_Model) list.get(i);
 
-        Glide.with(context).load(model.getCategory())
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(image1);
+
+            Glide.with(context).load(model.getCategory())
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(image1);
+
+
+            Glide.with(context).load(model.getCategory1())
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(image2);
+
+
+            Glide.with(context).load(model.getCategory2())
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(image3);
 
 
 
