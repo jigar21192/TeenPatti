@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,7 +64,7 @@ public class Game_Hajar extends AppCompatActivity {
     List<Manno_DataModel>bid_history;
     LinearLayout in_page,out_page,linearLayout;
     PopupWindow popupWindow,popupWindow1,h_popupWindow2;
-    RelativeLayout relativeLayout;
+    ConstraintLayout relativeLayout;
     Button select_card,select_coin,bid,history_bid;
     TextView h_username,h_balance,card_total;
     ImageView image_hajar_1,image_hajar_2,image_hajar_3;
