@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:orientation="horizontal"
-
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
     android:layout_height="70dp">
 
@@ -10,18 +9,18 @@
         android:layout_height="65dp"
         android:id="@+id/image1"
         android:layout_margin="2dp"
-        android:background="#000000"/>
+        android:src="@drawable/blank_card"/>
     <ImageView
         android:layout_width="45dp"
         android:layout_height="65dp"
         android:id="@+id/image2"
         android:layout_margin="2dp"
-        android:background="#000000"/>
+        android:src="@drawable/blank_card"/>
     <ImageView
         android:layout_width="45dp"
         android:layout_height="65dp"
         android:id="@+id/image3"
         android:layout_margin="2dp"
-        android:background="#000000"/>
+        android:src="@drawable/blank_card"/>
 
 </LinearLayout>

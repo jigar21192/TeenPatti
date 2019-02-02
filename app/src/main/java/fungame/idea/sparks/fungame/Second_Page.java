@@ -33,7 +33,7 @@ public class Second_Page extends AppCompatActivity {
     ImageView setting;
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String KEY_Email = "email";
-    String USER_DETAILS="http://sabkuchhbechde.ga/teenpatti/user_details.php";
+    String USER_DETAILS="http://jmfungame.com/user_details.php";
     SharedPreferences sharedpreferences;
     CardView hajar,manno,janno;
     TextView username,bal;

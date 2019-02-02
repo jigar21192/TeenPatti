@@ -50,12 +50,12 @@ public class Game_Hajar extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String KEY_Email = "email";
     public static final String ID= "id";
-    String CARD_Total="http://sabkuchhbechde.ga/teenpatti/hazar_total";
-    String HISTORY_BID="http://sabkuchhbechde.ga/teenpatti/hazar_history";
-    String CARD_LOAD="http://sabkuchhbechde.ga/teenpatti/hazar_res2.php";
-    String BID_URL="http://sabkuchhbechde.ga/teenpatti/hazar_bid.php";
-    String LIST_LOAD="http://sabkuchhbechde.ga/teenpatti/hazar_res1.php";
-    String USER_DETAILS="http://sabkuchhbechde.ga/teenpatti/user_details.php";
+    String CARD_Total="http://jmfungame.com/hazar_total";
+    String HISTORY_BID="http://jmfungame.com/hazar_history";
+    String CARD_LOAD="http://jmfungame.com/hazar_res2.php";
+    String BID_URL="http://jmfungame.com/hazar_bid.php";
+    String LIST_LOAD="http://jmfungame.com/hazar_res1.php";
+    String USER_DETAILS="http://jmfungame.com/user_details.php";
     SharedPreferences sharedpreferences;
     List<Hajar_Data_Model> list;
     List<Hajar_Data_Model> list1;

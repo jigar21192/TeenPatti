@@ -35,9 +35,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="76dp"
-        android:layout_marginRight="76dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginRight="150dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -172,7 +173,7 @@
 
         <TextView
             android:id="@+id/h_username"
-            android:layout_width="65dp"
+            android:layout_width="78dp"
             android:layout_height="19dp"
             android:fontFamily="@font/fontrec"
             android:gravity="center"
@@ -196,12 +197,11 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/l5"
+        android:layout_alignBottom="@+id/ll2"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="88dp"
-        android:layout_marginRight="88dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginRight="150dp"
         android:background="@android:color/transparent"
         android:gravity="center"
         android:orientation="horizontal">

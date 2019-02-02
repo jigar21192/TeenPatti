@@ -49,8 +49,8 @@ public class Manno_Game extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String KEY_Email = "email";
     public static final String ID= "id";
-    ProgressDialog pd;
 
+    ProgressDialog pd;
     String c_id1;
     String BID_DETAILS="http://jmfungame.com/bid_history.php";
     String USER_DETAILS="http://jmfungame.com/user_details.php";
