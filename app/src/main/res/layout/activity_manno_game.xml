@@ -43,7 +43,7 @@
             android:id="@+id/m_txt1"
             android:layout_width="100dp"
             android:layout_height="28dp"
-            android:text="અંદર"
+            android:text="IN"
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="25sp"
@@ -74,9 +74,8 @@
                 android:id="@+id/m_txt3"
                 android:layout_width="80dp"
                 android:layout_height="28dp"
-                android:fontFamily="@font/gujratisaral"
                 android:gravity="center"
-                android:text="અંદર"
+                android:text="IN"
                 android:textColor="@color/txtcolor"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -136,9 +135,8 @@
                 android:id="@+id/m_txt4"
                 android:layout_width="80dp"
                 android:layout_height="28dp"
-                android:fontFamily="@font/gujratisaral"
                 android:gravity="center"
-                android:text="બહાર"
+                android:text="OUT"
                 android:textColor="@color/txtcolor"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -172,7 +170,7 @@
             android:layout_width="100dp"
             android:layout_height="28dp"
             android:gravity="center"
-            android:text="બહાર"
+            android:text="OUT"
             android:textSize="25sp"
             android:textStyle="bold" />
 

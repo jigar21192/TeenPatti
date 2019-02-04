@@ -57,6 +57,7 @@ public class Game_Hajar extends AppCompatActivity {
     String BID_URL="http://jmfungame.com/hazar_bid.php";
     String LIST_LOAD="http://jmfungame.com/hazar_res1.php";
     String USER_DETAILS="http://jmfungame.com/user_details.php";
+    String TYPE="http://jmfungame.com/type1.php";
     SharedPreferences sharedpreferences;
     List<Hajar_Data_Model> list;
     List<Hajar_Data_Model> list1;
@@ -68,7 +69,7 @@ public class Game_Hajar extends AppCompatActivity {
     Button select_card,select_coin,bid,history_bid;
     TextView h_username,h_balance,card_total;
     ImageView image_hajar_1,image_hajar_2,image_hajar_3;
-    String name,balance, id,card_id,card_number,card_coin;
+    String name,balance, id,card_id,card_number,card_coin,type;
     ListView lv_hajar1,lv_hajar2,lv_hajar3;
     Timer repeatTask;
     Hajar_Data_Model model;
@@ -120,6 +121,7 @@ public class Game_Hajar extends AppCompatActivity {
 
                             load_list();
                         card_total();
+                        load_type();
                         bid_history=new ArrayList<>();
                         list=new ArrayList<>();
                    /*     list1=new ArrayList<>();
@@ -265,6 +267,56 @@ public class Game_Hajar extends AppCompatActivity {
             }
         }, 0, 5000);
 
+    }
+
+    private void load_type() {
+        StringRequest request1=new StringRequest(Request.Method.GET, TYPE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        String tt = object.getString("type");
+                        type = object.getString("text");
+
+                        if (tt.equals("Stop")){
+                            LayoutInflater li = getLayoutInflater();
+                            //Getting the View object as defined in the customtoast.xml file
+                            View layout = li.inflate(R.layout.custome_toast,(ViewGroup) findViewById(R.id.custom_toast_layout));
+                            TextView txt=layout.findViewById(R.id.custom_toast_message);
+                            txt.setText(type);
+                            Toast toast = new Toast(getApplicationContext());
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP, 0, 0);
+                            toast.setView(layout);
+                            toast.show();
+                            bid.setVisibility(View.GONE);
+
+                        }
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
+
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Game_Hajar.this,"Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        RequestQueue queue=Volley.newRequestQueue(Game_Hajar.this);
+        queue.add(request1);
     }
 
     private void card_total() {

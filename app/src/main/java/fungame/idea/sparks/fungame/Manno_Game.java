@@ -59,7 +59,7 @@ public class Manno_Game extends AppCompatActivity {
     String BID_URL="http://jmfungame.com/bid_details.php";
     String Last_Card="http://jmfungame.com/last_card.php";
     String AUTO="http://jmfungame.com/auto.php";
-    String TYPE="";
+    String TYPE="http://jmfungame.com/type.php";
     SharedPreferences sharedpreferences;
     LinearLayout m_in_page,m_out_page,m_linearLayout;
     PopupWindow m_popupWindow,m_popupWindow1,m_popupWindow2;
@@ -283,17 +283,18 @@ public class Manno_Game extends AppCompatActivity {
                         String tt = object.getString("type");
                         type = object.getString("text");
 
-                        if (type.equals("stop")){
+                        if (tt.equals("Stop")){
                             LayoutInflater li = getLayoutInflater();
                             //Getting the View object as defined in the customtoast.xml file
                             View layout = li.inflate(R.layout.custome_toast,(ViewGroup) findViewById(R.id.custom_toast_layout));
                             TextView txt=layout.findViewById(R.id.custom_toast_message);
-                            txt.setText("Game Stop");
+                            txt.setText(type);
                             Toast toast = new Toast(getApplicationContext());
                             toast.setDuration(Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.TOP, 0, 0);
                             toast.setView(layout);
                             toast.show();
+                            m_bid.setVisibility(View.GONE);
 
                         }
 
