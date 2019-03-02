@@ -136,6 +136,7 @@ public class Manno_Game extends AppCompatActivity {
                             @Override
                             public void onResponse(String response) {
                                 try {
+
                                     JSONArray array = new JSONArray(response);
                                     for (int i = 0; i < array.length(); i++) {
                                         JSONObject object = array.getJSONObject(i);
@@ -727,7 +728,7 @@ public class Manno_Game extends AppCompatActivity {
         final Button q_card=customView.findViewById(R.id.q_card);
         final Button k_card=customView.findViewById(R.id.k_card);
         final Button close_card=customView.findViewById(R.id.close_card);
-
+        ten.setText("10");
 
         one.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -129,10 +129,10 @@ public class Second_Page extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(Second_Page.this, "Work In Progress", Toast.LENGTH_SHORT).show();
-               /* Intent intent=new Intent(Second_Page.this,Game_Hajar.class);
+              //  Toast.makeText(Second_Page.this, "Work In Progress", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(Second_Page.this,Game_Hajar.class);
                 startActivity(intent);
-                finish();*/
+                finish();
 
 
             }

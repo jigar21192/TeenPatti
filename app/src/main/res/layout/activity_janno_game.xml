@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/j_r1"
@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".Janno_Game">
 
-    <TableLayout
+   <!-- <TableLayout
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
@@ -111,19 +111,20 @@
         </TableRow>
 
 
-    </TableLayout>
+    </TableLayout>-->
 
     <LinearLayout
         android:id="@+id/j_l1"
         android:layout_width="wrap_content"
         android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
         <TextView
             android:textColor="@color/txtcolor"
             android:id="@+id/j_txt1"
             android:layout_width="100dp"
             android:layout_height="28dp"
-            android:text="અંદર"
+            android:text="IN"
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="25sp"
@@ -136,35 +137,46 @@
             android:layout_marginTop="3dp"
             android:transcriptMode="normal" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="118dp">
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.148"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:layout_margin="10dp"
             android:id="@+id/j_l3"
             android:layout_width="80dp"
-            android:layout_height="125dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/j_txt3"
                 android:layout_width="80dp"
                 android:layout_height="28dp"
-                android:fontFamily="@font/gujratisaral"
                 android:gravity="center"
-                android:text="અંદર"
+                android:text="IN"
                 android:textColor="@color/txtcolor"
                 android:textSize="25sp"
-                android:textStyle="bold" />
+                 />-->
 
             <ImageView
                 android:id="@+id/j_image_in"
-                android:layout_width="80dp"
-                android:layout_height="90dp"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
                 android:layout_alignLeft="@+id/j_l3"
                 android:layout_alignBottom="@+id/j_l3"
                 android:layout_marginTop="3dp"
@@ -177,55 +189,49 @@
             android:layout_width="140dp"
             android:layout_height="125dp"
 
-            android:layout_centerInParent="true"
+
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/j_txt5"
                 android:layout_width="140dp"
-                android:layout_height="28dp"
+                android:layout_height="22dp"
                 android:gravity="center"
                 android:text="LAST CARD"
                 android:textColor="@color/txtcolor"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/j_image_last"
-                android:layout_width="80dp"
-                android:layout_height="90dp"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="3dp"
                 android:src="@drawable/blank_card" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_margin="10dp"
             android:id="@+id/j_l4"
             android:layout_width="80dp"
-            android:layout_height="125dp"
-            android:layout_alignTop="@+id/j_l3"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="145dp"
-            android:layout_marginRight="145dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
 
+            android:orientation="vertical">
+            <!--
             <TextView
                 android:id="@+id/j_txt4"
                 android:layout_width="80dp"
                 android:layout_height="28dp"
                 android:gravity="center"
-                android:text="બહાર"
+                android:text="OUT"
                 android:textColor="@color/txtcolor"
                 android:textSize="25sp"
-                android:textStyle="bold" />
+                 />-->
 
             <ImageView
                 android:id="@+id/j_image_out"
-                android:layout_width="80dp"
-                android:layout_height="90dp"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
                 android:layout_alignBottom="@+id/j_l4"
                 android:layout_marginTop="3dp"
                 android:src="@drawable/blank_card" />
@@ -237,28 +243,34 @@
     <LinearLayout
         android:id="@+id/j_l2"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints">
+
         <TextView
-            android:textColor="@color/txtcolor"
             android:id="@+id/j_txt2"
             android:layout_width="100dp"
             android:layout_height="28dp"
             android:gravity="center"
-            android:text="બહાર"
+            android:text="OUT"
+            android:textColor="@color/txtcolor"
             android:textSize="25sp"
             android:textStyle="bold" />
 
         <ListView
-            android:layout_marginTop="3dp"
             android:id="@+id/j_lv_out"
             android:layout_width="100dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp" />
 
 
     </LinearLayout>
@@ -266,10 +278,20 @@
     <LinearLayout
         android:layout_width="70dp"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="101dp"
-        android:layout_marginBottom="23dp"
-        android:orientation="vertical">
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="36dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.198"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.949"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/j_user"
@@ -283,8 +305,8 @@
 
         <TextView
             android:id="@+id/j_balance"
-            android:layout_width="wrap_content"
-            android:layout_height="19dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/fontrec"
             android:text="Balance"
@@ -294,47 +316,129 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/j_l6"
+        android:layout_width="80dp"
+        android:layout_height="125dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.322"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.611"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/j_txt6"
+            android:layout_width="80dp"
+            android:layout_height="28dp"
+            android:gravity="center"
+            android:text="IN"
+            android:textColor="@color/txtcolor"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/j_image_in6"
+            android:layout_width="80dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/blank_card" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/j_l7"
+        android:layout_width="80dp"
+        android:layout_height="125dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.611"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/j_txt7"
+            android:layout_width="80dp"
+            android:layout_height="28dp"
+            android:gravity="center"
+            android:text="OUT"
+            android:textColor="@color/txtcolor"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/j_image_in7"
+            android:layout_width="80dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/blank_card" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+
         android:layout_marginBottom="8dp"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.614"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.898"
+        tools:ignore="MissingConstraints">
 
         <Button
-            android:textColor="@color/btntxtcolor"
-            android:layout_margin="5dp"
+            android:id="@+id/j_select_card"
             android:layout_width="50dp"
             android:layout_height="30dp"
+            android:layout_margin="5dp"
             android:background="@drawable/roundshape"
             android:text="CARD"
-            android:id="@+id/j_select_card"/>
+            android:textColor="@color/btntxtcolor" />
 
         <Button
-            android:textColor="@color/btntxtcolor"
-            android:layout_margin="5dp"
             android:id="@+id/j_select_coin"
             android:layout_width="70dp"
             android:layout_height="30dp"
-            android:background="@drawable/roundshape"
-            android:text="COIN" />
-
-        <Button
-            android:textColor="@color/btntxtcolor"
             android:layout_margin="5dp"
             android:background="@drawable/roundshape"
+            android:text="COIN"
+            android:textColor="@color/btntxtcolor" />
+
+        <Button
             android:id="@+id/j_bid"
             android:layout_width="50dp"
             android:layout_height="30dp"
-            android:text="BID" />
-        <Button
-            android:textColor="@color/btntxtcolor"
             android:layout_margin="5dp"
             android:background="@drawable/roundshape"
+            android:text="BID"
+            android:textColor="@color/btntxtcolor" />
+
+        <Button
             android:id="@+id/history_bid"
             android:layout_width="65dp"
             android:layout_height="30dp"
-            android:text="History" />
+            android:layout_margin="5dp"
+            android:background="@drawable/roundshape"
+            android:text="History"
+            android:textColor="@color/btntxtcolor" />
     </LinearLayout>
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
