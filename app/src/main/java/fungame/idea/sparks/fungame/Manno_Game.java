@@ -199,7 +199,7 @@ public class Manno_Game extends AppCompatActivity {
                 }else if (coin.equals("COIN")){
                     Toast.makeText(Manno_Game.this, "Select Money", Toast.LENGTH_SHORT).show();
                 }else {
-                    pd.setMessage("loading");
+                    pd.setMessage("loading...");
                     pd.show();
 
                     StringRequest request=new StringRequest(Request.Method.POST, BID_URL, new Response.Listener<String>() {
