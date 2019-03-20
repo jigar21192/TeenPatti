@@ -58,7 +58,7 @@ public class Janno_Game extends AppCompatActivity {
     String BID_URL="http://jmfungame.com/janno_bid.php";
     String Last_Card="http://jmfungame.com/janno_last_card.php";
     String AUTO="http://jmfungame.com/auto.php";
-    String TYPE="http://jmfungame.com/type.php";
+    String TYPE="http://jmfungame.com/time.php";
     SharedPreferences sharedpreferences;
     LinearLayout j_in_page,j_out_page,j_linearLayout;
     PopupWindow j_popupWindow,j_popupWindow1,j_popupWindow2;
@@ -130,6 +130,8 @@ public class Janno_Game extends AppCompatActivity {
                         list_view_details();
                         load_type();
 
+
+
                         // load_out_page();
 
                         StringRequest stringRequest=new StringRequest(Request.Method.POST, USER_DETAILS, new Response.Listener<String>() {
@@ -142,7 +144,7 @@ public class Janno_Game extends AppCompatActivity {
                                         JSONObject object = array.getJSONObject(i);
                                         name = object.getString("name");
                                         balance = object.getString("janno_coin");
-                                        Log.e(">>>>>",">>>>>"+name);
+
 
                                     }
                                 } catch (JSONException e) {
@@ -276,15 +278,41 @@ public class Janno_Game extends AppCompatActivity {
         StringRequest request1=new StringRequest(Request.Method.GET, TYPE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.e("RRRRRRRhhhh",">>>>>>>"+response);
                 try {
                     JSONArray array = new JSONArray(response);
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
-                        String tt = object.getString("type");
-                        type = object.getString("text");
 
-                        if (tt.equals("Stop")){
+                        type = object.getString("text");
+                        Log.e("hhhh",">>>>>>>"+type);
+                        if (type.equals("New_game")){
                             LayoutInflater li = getLayoutInflater();
+                            //Getting the View object as defined in the customtoast.xml file
+                            View layout = li.inflate(R.layout.custome_toast,(ViewGroup) findViewById(R.id.custom_toast_layout));
+                            TextView txt=layout.findViewById(R.id.custom_toast_message);
+                            txt.setText("New Game Start");
+                            Toast toast = new Toast(getApplicationContext());
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP, 0, 0);
+                            toast.setView(layout);
+                            toast.show();
+
+                         /*   in_list.clear();
+                            out_list.clear();
+                            j_image_in.setImageResource(R.drawable.blank_card);
+                            j_image_out.setImageResource(R.drawable.blank_card);*/
+
+
+
+
+                        }else if (type.equals("not")){
+
+
+
+
+                        }else {
+                              LayoutInflater li = getLayoutInflater();
                             //Getting the View object as defined in the customtoast.xml file
                             View layout = li.inflate(R.layout.custome_toast,(ViewGroup) findViewById(R.id.custom_toast_layout));
                             TextView txt=layout.findViewById(R.id.custom_toast_message);
@@ -294,9 +322,9 @@ public class Janno_Game extends AppCompatActivity {
                             toast.setGravity(Gravity.TOP, 0, 0);
                             toast.setView(layout);
                             toast.show();
-                            j_bid.setVisibility(View.GONE);
 
                         }
+
 
 
                     }
@@ -512,6 +540,9 @@ public class Janno_Game extends AppCompatActivity {
 
                             String card=object.getString("category");
                             in_list.add(card);
+
+                            Manno_Adapter adapter=new Manno_Adapter(Janno_Game.this,in_list);
+                            j_lv_in.setAdapter(adapter);
                         }
 
                         else if (i_o.trim().equals("out")){
@@ -521,12 +552,21 @@ public class Janno_Game extends AppCompatActivity {
 
                             Manno_Adapter adapter=new Manno_Adapter(Janno_Game.this,out_list);
                             j_lv_out.setAdapter(adapter);
+                        }else {
+
+                         /*
+                            in_list.clear();
+                            out_list.clear();
+                            Manno_Adapter adapter=new Manno_Adapter(Janno_Game.this,in_list);
+                            j_lv_in.setAdapter(adapter);
+                            Manno_Adapter adapter1=new Manno_Adapter(Janno_Game.this,out_list);
+                            j_lv_out.setAdapter(adapter1);*/
+
                         }
 
-                        Manno_Adapter adapter=new Manno_Adapter(Janno_Game.this,in_list);
-                        j_lv_in.setAdapter(adapter);
 
-                        adapter.notifyDataSetChanged();
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
