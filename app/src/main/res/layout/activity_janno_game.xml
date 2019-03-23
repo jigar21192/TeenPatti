@@ -45,6 +45,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.514"
@@ -81,7 +82,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+       <!-- <LinearLayout
             android:id="@+id/j_l5"
             android:layout_width="140dp"
             android:layout_height="125dp"
@@ -106,7 +107,7 @@
                 android:layout_marginTop="3dp"
                 android:src="@drawable/blank_card" />
         </LinearLayout>
-
+-->
         <LinearLayout
             android:id="@+id/j_l4"
             android:layout_width="80dp"

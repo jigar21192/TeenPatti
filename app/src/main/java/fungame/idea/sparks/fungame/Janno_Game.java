@@ -101,7 +101,7 @@ public class Janno_Game extends AppCompatActivity {
         j_image_out=findViewById(R.id.j_image_out);
         j_username=findViewById(R.id.j_user);
         j_balance=findViewById(R.id.j_balance);
-        j_image_last=findViewById(R.id.j_image_last);
+      //  j_image_last=findViewById(R.id.j_image_last);
         j_outcard=findViewById(R.id.j_image_out1);
         j_incard=findViewById(R.id.j_image_in1);
 
@@ -124,8 +124,8 @@ public class Janno_Game extends AppCompatActivity {
                         // load_auto();
                         load_last_card();
                         load_in_page();
-                        in_list=new ArrayList<>();
-                        out_list=new ArrayList<>();
+                        /*in_list=new ArrayList<>();
+                        out_list=new ArrayList<>();*/
                         bid_history=new ArrayList<>();
                         list_view_details();
                         load_type();
@@ -298,10 +298,15 @@ public class Janno_Game extends AppCompatActivity {
                             toast.setView(layout);
                             toast.show();
 
-                         /*   in_list.clear();
+                            in_list=new ArrayList<>();
+                            out_list=new ArrayList<>();
+                            in_list.clear();
                             out_list.clear();
+
+                            j_lv_in.setAdapter(null);
+                            j_lv_out.setAdapter(null);
                             j_image_in.setImageResource(R.drawable.blank_card);
-                            j_image_out.setImageResource(R.drawable.blank_card);*/
+                            j_image_out.setImageResource(R.drawable.blank_card);
 
 
 
@@ -391,12 +396,12 @@ public class Janno_Game extends AppCompatActivity {
                         String incard=object.getString("incard");
                         String outcard=object.getString("outcard");
 
-                        Glide.with(getApplicationContext()).load(lastid)
+                       /* Glide.with(getApplicationContext()).load(lastid)
                                 .thumbnail(0.5f)
                                 .override(80,90)
                                 .crossFade()
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .into(j_image_last);
+                                .into(j_image_last);*/
                         Glide.with(getApplicationContext()).load(incard)
                                 .thumbnail(0.5f)
                                 .override(80,90)
@@ -528,12 +533,16 @@ public class Janno_Game extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.e("Res",">>>>"+response);
 
+                in_list=new ArrayList<>();
+                out_list=new ArrayList<>();
 
                 try {
                     JSONArray array=new JSONArray(response);
                     for (int i=0;i<array.length();i++) {
                         JSONObject object = array.getJSONObject(i);
                         String i_o=object.getString("i_o");
+
+
 
 
                         if (i_o.trim().equals("in")){
@@ -543,6 +552,7 @@ public class Janno_Game extends AppCompatActivity {
 
                             Manno_Adapter adapter=new Manno_Adapter(Janno_Game.this,in_list);
                             j_lv_in.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
                         }
 
                         else if (i_o.trim().equals("out")){
@@ -552,7 +562,8 @@ public class Janno_Game extends AppCompatActivity {
 
                             Manno_Adapter adapter=new Manno_Adapter(Janno_Game.this,out_list);
                             j_lv_out.setAdapter(adapter);
-                        }else {
+                            adapter.notifyDataSetChanged();
+                        }else{
 
                          /*
                             in_list.clear();
@@ -606,7 +617,7 @@ public class Janno_Game extends AppCompatActivity {
                         String counter = object.getString("counter");
                       //  String msg = object.getString("msg");
 
-
+                    Log.e("Image",">>>>>>>"+i_o);
 
 
                         if (i_o.trim().equals("in")) {
